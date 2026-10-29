@@ -445,6 +445,43 @@ main.talkmode .talkbar{position:static;flex:none;margin-top:0;box-shadow:none;bo
 .kfree-body{margin-top:12px}
 .kopt-l{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:4px}
 .kseg button{font-size:13px;padding-left:4px;padding-right:4px}
+.hearts{display:flex;align-items:center;gap:4px;font-size:20px;margin-bottom:-6px}
+.hearts span{transition:transform .2s}
+.hearts span:not(.on){opacity:.55}
+.hearts .hscore{margin-left:auto;font-size:13px;opacity:1}
+.bigemo{font-size:56px;line-height:1}
+.klives{flex-wrap:wrap;gap:8px}
+.klives .seg{flex:none}
+.hearbtns{gap:14px;align-items:center}
+.row.wrap{flex-wrap:wrap;gap:8px}
+.rfix{gap:6px}
+.rbetter{font-size:20px;font-weight:700}
+.rchk,.rword{display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer}
+.rword{padding:6px 0;border-top:1px solid var(--rule)}
+.rword:first-child{border-top:0}
+.rchk input,.rword input{width:20px;height:20px;accent-color:var(--line);flex:none}
+/* ---- reading ---- */
+.slist{display:flex;flex-direction:column;gap:8px}
+.srow{display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--rule);border-radius:14px;padding:12px 14px;text-align:left;color:var(--ink);font:inherit;box-shadow:var(--shadow)}
+.srow .grow{display:flex;flex-direction:column;min-width:0}
+.srow.ahead{opacity:.6}
+.shead h2{margin-bottom:2px}
+.story{gap:14px}
+.sline{display:flex;gap:10px;align-items:flex-start}
+.stext{font-size:20px;line-height:1.9}
+.tok{border-radius:6px;padding:1px 1px;cursor:pointer;border-bottom:1.5px dotted color-mix(in srgb,var(--muted) 50%,transparent)}
+.tok:active,.tok:hover{background:var(--line-soft)}
+.sen{padding:2px 0;font-size:13px}
+.opt.right{border-color:var(--good);background:var(--good-soft);color:var(--good)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft);color:var(--bad)}
+.opt:disabled{opacity:1}
+.tokpop{position:sticky;bottom:8px;z-index:5;background:var(--surface);border:1px solid var(--rule);border-radius:18px;padding:12px 14px;box-shadow:var(--shadow-lift);display:flex;flex-direction:column;gap:6px;animation:cardIn .2s ease both}
+.tp-w{font-size:26px;font-weight:700}
+.tp-en{font-size:17px;font-weight:600}
+.readbar{width:100%;text-align:left;font:inherit;color:var(--ink);gap:12px;cursor:pointer}
+.readbar .grow{display:flex;flex-direction:column}
+.rb-ic{font-size:28px}
+.tok{white-space:nowrap}
 /* ================= Visual polish ================= */
 :root{--r:18px;--shadow:0 1px 2px rgba(23,32,58,.05),0 6px 18px rgba(23,32,58,.06);--shadow-lift:0 2px 4px rgba(23,32,58,.06),0 12px 28px rgba(23,32,58,.10)}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--shadow:0 1px 0 rgba(255,255,255,.03) inset,0 8px 22px rgba(0,0,0,.28);--shadow-lift:0 1px 0 rgba(255,255,255,.04) inset,0 14px 30px rgba(0,0,0,.4);--surface:#182036;--rule:#26304A}}
@@ -2151,6 +2188,657 @@ dl:{who:"A new classmate", scene:"Your first real chat with someone new.", lines
 ["A","えいご。 だから、 りゅうがくせい と はなしたかった ん だ。","English. So I wanted to talk with exchange students."],
 ["B","なるほど！ じゃあ、 おたがい に れんしゅう しよう！","I see! Then let's practise with each other!"]]}},
 );
+RAW.push(
+/* ================= PART 13: Natural casual speech ================= */
+{t:"Explaining with ～んだ", jp:"せつめいの「んだ」", goal:"Explain reasons, ask for explanations and sound natural with んだ / んです.",
+w:`じつは;actually / to tell the truth;実は
+ねぼう;oversleeping;寝坊
+ちこく;being late;遅刻
+どうした;what's wrong? / what happened?;
+かぜ;a cold;風邪
+あたま;head;頭
+いたい;painful / hurts;痛い
+きゅうに;suddenly;急に
+ようじ;errand / something to do;用事
+ひっこし;moving house;引っ越し
+しけん;exam;試験
+きんちょう;nervous / tense;緊張
+ひさしぶり;long time no see;久しぶり
+げんき;well / energetic;元気
+じゃない;isn't it? / not;`,
+g:[
+{t:"Explaining: ～んだ / ～んです", d:"Add <b>んだ</b> (casual) or <b>んです</b> (polite) after the plain form to explain a situation or give the background: <b>ねぼうした んです</b> = (the thing is,) I overslept. After nouns and な-adjectives use <b>なんだ</b>: <b>しけん なんだ</b>.",
+ex:["すみません、 ねぼう した んです|Sorry, (the thing is) I overslept.","あした しけん なんだ|I've got an exam tomorrow, you see.","じつは、 らいげつ ひっこし する んです|Actually, I'm moving next month.","あたま が いたい んだ|My head hurts, that's all."]},
+{t:"Asking for an explanation: ～の？ / ～んですか", d:"Ask about what you see with <b>の？</b> (casual) or <b>んですか</b> (polite): <b>どうした の？</b> = What happened? It sounds caring and curious, not cold.",
+ex:["どうした の？ げんき じゃない ね|What's wrong? You don't seem well.","どこ に いく んですか|Where are you going?","きゅうに どうした の？|What's up, all of a sudden?"]}],
+dl:{who:"Yui", scene:"Alex arrives late to class.", lines:[
+["A","おはよう！ どうした の？ ちこく だね。","Morning! What happened? You're late."],
+["B","ごめん、 じつは ねぼう した んだ。","Sorry, actually I overslept."],
+["A","めずらしい ね。 つかれてる の？","That's unusual. Are you tired?"],
+["B","うん、 あした しけん なんだ。 きのう おそく まで べんきょう してた。","Yeah, I've got an exam tomorrow. I studied till late yesterday."],
+["A","そっか。 がんばって ね！","I see. Good luck!"],
+["B","ありがとう。 ちょっと きんちょう してる んだ。","Thanks. I'm a bit nervous, to be honest."]]}},
+
+{t:"Looks like, seems like", jp:"そう・みたい", goal:"Say how things look, what seems to be true, and react to what you see.",
+w:`おいしそう;looks tasty;美味しそう
+たかそう;looks expensive;高そう
+むずかしそう;looks difficult;難しそう
+たのしそう;looks fun;楽しそう
+ねむそう;looks sleepy;眠そう
+あめ;rain;雨
+ふりそう;looks like it'll fall (rain);降りそう
+みたい;seems like / looks like;
+らしい;apparently / I hear;
+ケーキ;cake;
+ゆき;snow;雪
+こむ;to get crowded;混む
+まつり;festival;祭り
+うわさ;rumour;噂`,
+g:[
+{t:"Looks ～: stem / adjective + そう", d:"Say how something looks from the outside: drop い from an adjective and add <b>そう</b> (おいしい → <b>おいしそう</b>). With verbs, use the stem: ふる → <b>ふりそう</b> = looks like it'll fall. Exception: いい → <b>よさそう</b>.",
+ex:["この ケーキ、 おいしそう！|This cake looks tasty!","あめ が ふりそう だね|Looks like it's going to rain.","その しけん、 むずかしそう|That exam looks hard.","よさそう な みせ だね|Looks like a nice shop."]},
+{t:"Seems: ～みたい / I hear: ～らしい", d:"<b>みたい</b> (casual, after plain forms) = it seems, judging from what you notice: <b>こんでる みたい</b>. <b>らしい</b> = apparently, from what you heard: <b>あした は ゆき らしい</b>. With nouns, no な or だ: <b>ゆき みたい</b>.",
+ex:["きょう は こんでる みたい|It seems crowded today.","あした は ゆき らしい よ|Apparently it'll snow tomorrow.","けんた、 ねむそう…。 つかれてる みたい|Kenta looks sleepy… he seems tired."]}],
+dl:{who:"Kenta", scene:"Walking past a festival.", lines:[
+["A","みて！ まつり みたい だよ。","Look! Looks like a festival."],
+["B","ほんとう だ。 たのしそう！","Oh yeah. Looks fun!"],
+["A","あの たこやき、 おいしそう じゃない？","Don't those takoyaki look good?"],
+["B","うん。 でも ちょっと こんでる みたい。","Yeah. But it seems a bit crowded."],
+["A","あとで はなび も ある らしい よ。","Apparently there are fireworks later too."],
+["B","まじ？ じゃあ、 のころう！","Really? Then let's stay!"]]}},
+
+{t:"Try it and see", jp:"やってみる", goal:"Say you'll try something, suggest trying, and talk about attempts.",
+w:`ためす;to try out;試す
+きる;to wear / put on (clothes);着る
+はく;to wear (shoes, trousers);履く
+しちゃく;trying clothes on;試着
+なっとう;natto (fermented soybeans);納豆
+カラオケ;karaoke;
+うたう;to sing;歌う
+こえ;voice;声
+いっかい;once;一回
+むり;impossible / too much;無理
+やめる;to quit / give up;
+あきらめる;to give up;諦める
+さいご;the end / last;最後`,
+g:[
+{t:"Try doing: ～てみる", d:"Add <b>みる</b> to the て-form: <b>たべてみる</b> = try eating (and see how it is). Very common for suggestions: <b>やってみたら？</b> = Why don't you give it a go? Polite: <b>～てみます</b>.",
+ex:["なっとう、 たべてみる？|Want to try natto?","いっかい やってみたい|I want to try it once.","これ、 きてみて も いい ですか|Can I try this on?","カラオケ で うたってみたら？|Why don't you try singing at karaoke?"]},
+{t:"Trying to (but…): volitional + とする", d:"Make the 'let's' form (たべよう, いこう) and add <b>とした</b>: <b>でかけよう と した とき</b> = just as I was about to go out. For effort: <b>～ように している</b> = I try to (as a habit).",
+ex:["ねよう と した とき、 でんわ が きた|Just as I was about to sleep, the phone rang.","まいにち にほんご で はなす ように してる|I try to speak Japanese every day.","あきらめないで、 さいご まで やってみよう|Don't give up, let's try to the end."]}],
+dl:{who:"Yui", scene:"At a karaoke box.", lines:[
+["A","アレックス も うたってみて！","Alex, you try singing too!"],
+["B","ええ、 にほんご の うた は むり だよ。","What, Japanese songs are too hard for me."],
+["A","いっかい やってみたら？ たのしい よ。","Why not try once? It's fun."],
+["B","じゃあ… この アニメ の うた、 うたってみる。","Well… I'll try this anime song."],
+["A","すごい！ こえ、 いい ね！","Amazing! You've got a nice voice!"],
+["B","ほんと？ また やってみよう かな。","Really? Maybe I'll try again."]]}},
+
+{t:"Suggestions and others' wishes", jp:"ていあん", goal:"Make suggestions, give gentle advice and talk about what others want.",
+w:`ていあん;suggestion;提案
+どう;how about;
+やすむ;to rest / take a day off;休む
+びょういん;hospital / clinic;病院
+いけば;if you go;行けば
+ほしがる;(someone else) wants;欲しがる
+いきたがる;(someone else) wants to go;行きたがる
+いもうと;little sister;妹
+おとうと;little brother;弟
+おみやげ;souvenir;お土産
+ねこ;cat;猫
+かう;to keep (a pet) / to buy;飼う
+たまには;once in a while;`,
+g:[
+{t:"Why don't you…: ～たらどう？ / ～ば？", d:"Suggest something with the た-form + <b>らどう？</b>: <b>やすんだら どう？</b> = Why don't you rest? Shorter and very casual: <b>～ば？</b>: <b>びょういん に いけば？</b> Polite: <b>～たらどうですか</b>.",
+ex:["つかれてる なら、 やすんだら どう？|If you're tired, why don't you rest?","びょういん に いけば？|Why don't you go to the doctor?","たまには でかけたら どう ですか|How about going out once in a while?"]},
+{t:"Others want: ～たがる / ほしがる", d:"Japanese doesn't say '<i>he wants</i>' with たい directly. Use <b>～たがっている</b> for someone else: <b>いもうと が いきたがってる</b> = my sister wants to go. For things: <b>ほしがってる</b>.",
+ex:["いもうと が にほん に いきたがってる|My little sister wants to go to Japan.","おとうと は ねこ を ほしがってる|My little brother wants a cat.","みんな おみやげ を ほしがる んだ|Everyone always wants souvenirs."]}],
+dl:{who:"Host mother", scene:"Talking at home in the evening.", lines:[
+["A","げんき ない ね。 どうした の？","You seem down. What's wrong?"],
+["B","かぞく に あいたい んです。 いもうと も さみしがってる みたい で。","I miss my family. My sister seems lonely too."],
+["A","ビデオ で でんわ したら どう？","Why don't you video call them?"],
+["B","そう です ね。 いもうと は にほん に きたがってる んです。","True. My sister wants to come to Japan."],
+["A","じゃあ、 なつやすみ に よんだら？","Then why not invite her in the summer holidays?"],
+["B","いい ですね！ きいてみます。","Good idea! I'll ask."]]}},
+
+/* ================= PART 14: Opinions & discussion ================= */
+{t:"Giving your opinion", jp:"いけん", goal:"Say what you think, ask others' opinions and soften your views.",
+w:`おもう;to think;思う
+かんがえ;idea / thought;考え
+どうおもう;what do you think?;どう思う
+べんり;convenient;便利
+ふべん;inconvenient;不便
+ひつよう;necessary;必要
+せいふく;school uniform;制服
+ルール;rule;
+きびしい;strict;厳しい
+ちょっと;a bit (softener);
+かな;I wonder;
+んじゃない;isn't it? / I'd say;`,
+g:[
+{t:"I think: ～とおもう", d:"Plain form + <b>とおもう</b> = I think: <b>べんり だ と おもう</b>. Ask with <b>どう おもう？</b> For softer opinions, add <b>かな</b>: <b>いい かな と おもう</b> = I kind of think it's good.",
+ex:["せいふく は べんり だ と おもう|I think uniforms are convenient.","この ルール、 どう おもう？|What do you think about this rule?","ちょっと きびしい かな と おもう|I kind of think it's a bit strict."]},
+{t:"Don't you think?: ～んじゃない？", d:"<b>～んじゃない？</b> (rising tone) gently suggests your opinion: <b>たかい んじゃない？</b> = Isn't it (a bit) expensive? With nouns and な-adjectives: <b>ひつよう ないんじゃない？</b> / <b>べんり なんじゃない？</b>",
+ex:["それ、 ちょっと たかい んじゃない？|Isn't that a bit expensive?","せいふく、 ひつよう ない んじゃない？|Don't you think uniforms aren't needed?","あした の ほう が いい んじゃない？|Wouldn't tomorrow be better?"]}],
+dl:{who:"Kenta", scene:"Talking about school rules.", lines:[
+["A","にほん の こうこう の ルール、 どう おもう？","What do you think of Japanese high school rules?"],
+["B","ちょっと きびしい かな と おもう。","I kind of think they're a bit strict."],
+["A","たとえば？","For example?"],
+["B","かみ の いろ とか。 じゆう で いい んじゃない？","Like hair colour. Isn't it fine to be free?"],
+["A","たしかに。 でも せいふく は べんり だ と おもう よ。","True. But I think uniforms are convenient."],
+["B","それ は そう だね。 あさ、 らく だし。","That's true. Mornings are easier."]]}},
+
+{t:"Agreeing and disagreeing", jp:"さんせい・はんたい", goal:"Agree, disagree politely and say 'yes, but…' without sounding rude.",
+w:`さんせい;agreement / in favour;賛成
+はんたい;against / opposite;反対
+たしかに;certainly / that's true;確かに
+そうかな;I'm not so sure;
+でも;but;
+けど;but (casual);
+ぎゃく;the opposite;逆
+いみ;meaning;意味
+わかる;to understand / I get it;
+ぜったい;definitely;絶対
+かならずしも;not necessarily;必ずしも
+ばあい;case / situation;場合`,
+g:[
+{t:"Yes, but…: たしかに～けど", d:"Show you understand first, then give your view: <b>たしかに ～ けど、…</b> = True, ~, but… This is the most natural way to disagree in Japanese. Short version: <b>わかる けど…</b>",
+ex:["たしかに べんり だ けど、 たかい よね|It's true it's convenient, but it's expensive, right?","わかる けど、 ぼく は はんたい かな|I get it, but I'm kind of against it.","いみ は わかる けど、 ちょっと ちがう と おもう|I see what you mean, but I think it's a bit different."]},
+{t:"Soft disagreement: そうかな / かならずしも～ない", d:"<b>そうかな…</b> = Hmm, I'm not so sure. <b>かならずしも ～ない</b> = not necessarily: <b>かならずしも わるく ない</b>. <b>ばあい による</b> = it depends.",
+ex:["そう かな…。 ぼく は ぎゃく だ と おもう|Hmm, not sure… I think it's the opposite.","かならずしも わるく ない よ|It's not necessarily bad.","それ は ばあい による ね|That depends on the situation."]}],
+dl:{who:"Yui", scene:"Discussing smartphones at school.", lines:[
+["A","がっこう で スマホ を つかう の、 わたし は はんたい。","I'm against using smartphones at school."],
+["B","たしかに じゅぎょう ちゅう は よく ない けど…","True, it's not good during class, but…"],
+["A","けど？","But?"],
+["B","じしょ と して つかう ばあい も ある よ。","There are times you use it as a dictionary."],
+["A","うーん、 そう かな。 でも、 それ は わかる。","Hmm, I'm not sure. But I get that."],
+["B","かならずしも わるく ない と おもう ん だ。","I think it's not necessarily bad."]]}},
+
+{t:"Comparing in detail", jp:"くらべる", goal:"Compare things, say 'not as… as' and pick the best.",
+w:`くらべる;to compare;比べる
+より;than;
+ほう;side (in comparisons);方
+ほど;as… as (with negative);
+いちばん;the most;一番
+なか;among / inside;中
+とうきょう;Tokyo;東京
+おおさか;Osaka;大阪
+いなか;countryside;田舎
+とかい;city;都会
+しずか;quiet;静か
+にぎやか;lively;賑やか
+ずっと;by far / much more;`,
+g:[
+{t:"A is more… than B: AはBより / Bより Aのほうが", d:"<b>A は B より ～</b> = A is more ~ than B. To pick one of two: <b>B より A の ほう が ～</b>. Make it stronger with <b>ずっと</b>: <b>ずっと しずか</b> = much quieter.",
+ex:["とうきょう は おおさか より おおきい|Tokyo is bigger than Osaka.","とかい より いなか の ほう が すき|I like the countryside more than the city.","いなか の ほう が ずっと しずか だよ|The countryside is much quieter."]},
+{t:"Not as… as: ほど～ない / the most: いちばん", d:"<b>A は B ほど ～ない</b> = A is not as ~ as B: <b>おおさか は とうきょう ほど おおきく ない</b>. The most: <b>～の なか で いちばん</b>.",
+ex:["ぼく の まち は とうきょう ほど にぎやか じゃ ない|My town isn't as lively as Tokyo.","にほん の たべもの の なか で、 なに が いちばん すき？|Of all Japanese food, what do you like most?","ことし は きょねん ほど さむく ない|This year isn't as cold as last year."]}],
+dl:{who:"Host father", scene:"Talking about where to live.", lines:[
+["A","とうきょう と おおさか、 どっち が すき？","Tokyo or Osaka, which do you like?"],
+["B","おおさか の ほう が すき です。 ひと が やさしい ので。","I prefer Osaka. Because the people are kind."],
+["A","そう だね。 とうきょう ほど いそがしく ない し。","Right. And it's not as busy as Tokyo."],
+["B","でも、 いちばん すき なの は この まち です。","But the place I like most is this town."],
+["A","ほんとう？ いなか だよ。","Really? It's the countryside."],
+["B","とかい より ずっと しずか で、 いい です。","It's much quieter than the city. It's nice."]]}},
+
+{t:"Wishes and regrets", jp:"ねがい・こうかい", goal:"Say what you hope for, what you should have done and what you regret.",
+w:`ねがい;wish;願い
+こうかい;regret;後悔
+よかった;it would have been good / glad;
+いいな;it'd be nice;
+はやく;earlier / quickly;早く
+もっと;more;
+べんきょう;study;勉強
+かさ;umbrella;傘
+もってくる;to bring;持って来る
+しっぱい;failure / mistake;失敗
+ざんねん;too bad / a pity;残念
+ゆめ;dream;夢
+かなう;to come true;叶う`,
+g:[
+{t:"I should have: ～ばよかった", d:"ば-form + <b>よかった</b> = I should have (but didn't): <b>もっと べんきょう すれば よかった</b>. Negative regret: <b>～なければ よかった</b> = I shouldn't have.",
+ex:["かさ を もってくれば よかった|I should have brought an umbrella.","もっと はやく ねれば よかった|I should have gone to bed earlier.","あんな こと、 いわなければ よかった|I shouldn't have said that."]},
+{t:"I hope: ～といいな / ～たらいいな", d:"Plain form + <b>と いい な</b> or た-form + <b>ら いい な</b> = it'd be nice if / I hope: <b>あした はれる と いい な</b>. Polite: <b>～と いい ですね</b> (wishing someone well).",
+ex:["あした はれる と いい な|I hope it's sunny tomorrow.","ゆめ が かなう と いい ですね|I hope your dream comes true.","また あえたら いい な|It'd be nice if we could meet again."]}],
+dl:{who:"Yui", scene:"After a test.", lines:[
+["A","しけん、 どう だった？","How was the exam?"],
+["B","だめ だった。 もっと べんきょう すれば よかった。","Bad. I should have studied more."],
+["A","ざんねん。 でも つぎ が ある よ。","Too bad. But there's a next time."],
+["B","うん。 つぎ は ごうかく できる と いい な。","Yeah. I hope I can pass next time."],
+["A","いっしょに べんきょう しよう か？","Shall we study together?"],
+["B","ほんと？ そう できたら いい な！","Really? It'd be great if we could!"]]}},
+
+/* ================= PART 15: Telling stories well ================= */
+{t:"Then, unexpectedly…", jp:"そうしたら", goal:"Tell what happened next, including surprises you discovered.",
+w:`そしたら;and then (casual);
+ドア;door;
+あける;to open;開ける
+だれも;nobody (with negative);誰も
+いない;not there (people);
+へや;room;部屋
+まっくら;pitch dark;真っ暗
+でんき;light / electricity;電気
+つける;to turn on;
+みんな;everyone;
+サプライズ;surprise;
+たんじょうび;birthday;誕生日
+おどろく;to be surprised;驚く
+なんと;to my surprise;`,
+g:[
+{t:"When I did X, (I found) Y: ～たら", d:"た-form + <b>ら</b> can mean 'when I did ~, (unexpectedly) ~': <b>ドア を あけたら、 だれも いなかった</b> = When I opened the door, nobody was there. The second part is something you discovered, in the past.",
+ex:["ドア を あけたら、 だれも いなかった|When I opened the door, no one was there.","えき に ついたら、 でんしゃ が もう でて いた|When I got to the station, the train had already left.","でんき を つけたら、 みんな が いた！|When I turned on the light, everyone was there!"]},
+{t:"Story connectors: そしたら / なんと / けっきょく", d:"Keep a story flowing: <b>そしたら</b> = and then (casual), <b>なんと</b> = and guess what, <b>けっきょく</b> = in the end. Listeners love <b>なんと</b> before the surprise.",
+ex:["へや に はいった。 そしたら、 まっくら だった|I went into the room. And then, it was pitch dark.","なんと、 みんな の サプライズ だった|And guess what, it was a surprise from everyone.","けっきょく、 すごく たのしかった|In the end, it was really fun."]}],
+dl:{who:"Kenta", scene:"Alex tells Kenta about his birthday.", lines:[
+["A","たんじょうび、 なに か あった？","Did anything happen on your birthday?"],
+["B","うん！ いえ に かえったら、 へや が まっくら だった ん だ。","Yeah! When I got home, the room was pitch dark."],
+["A","え、 こわい！","What, scary!"],
+["B","そしたら、 でんき が ついて… なんと、 ホストファミリー の サプライズ！","And then the lights came on… and it was a surprise from my host family!"],
+["A","すごい！ おどろいた でしょう。","Amazing! You must have been surprised."],
+["B","すごく おどろいた。 けっきょく ないちゃった よ。","Super surprised. In the end I cried."]]}},
+
+{t:"I heard that…", jp:"でんぶん", goal:"Pass on news you heard and react to rumours.",
+w:`ニュース;news;
+てんきよほう;weather forecast;天気予報
+たいふう;typhoon;台風
+くる;to come;来る
+やすみ;day off / closed;休み
+てんこうせい;transfer student;転校生
+せんせい;teacher;先生
+けっこん;marriage;結婚
+ほんとう;true / real;本当
+うそ;lie / no way;嘘
+しんじられない;unbelievable;信じられない
+きいた;heard;聞いた`,
+g:[
+{t:"I heard that: ～そうだ", d:"Plain form + <b>そうだ / そうです</b> = I heard that (passing on information): <b>たいふう が くる そう です</b>. Not the same as the 'looks like' そう: here it follows the full plain form. Name your source with <b>～によると</b>.",
+ex:["てんきよほう に よると、 あした は あめ だ そう です|According to the forecast, it'll rain tomorrow.","たいふう が くる そう だよ|I heard a typhoon is coming.","あした は がっこう が やすみ だ そう です|I heard school is closed tomorrow."]},
+{t:"Casual hearsay: ～って", d:"In casual speech, <b>って</b> replaces そうだ or といっていた: <b>せんせい、 けっこん する って</b> = I heard the teacher's getting married. React with <b>うそ！</b> (no way!) or <b>ほんとう に？</b>",
+ex:["せんせい、 けっこん する って！|They say the teacher's getting married!","てんこうせい が くる って きいた|I heard a transfer student is coming.","うそ！ しんじられない|No way! Unbelievable."]}],
+dl:{who:"Yui", scene:"Gossip before homeroom.", lines:[
+["A","ねえ、 きいた？ たなか せんせい、 けっこん する って！","Hey, did you hear? Mr Tanaka's getting married!"],
+["B","うそ！ ほんとう に？","No way! Really?"],
+["A","ほんとう だよ。 らいげつ だ そう。","It's true. Next month, apparently."],
+["B","しんじられない！ あと、 てんこうせい も くる って きいた。","Unbelievable! Also I heard a transfer student is coming."],
+["A","え、 どこ から？","Huh, from where?"],
+["B","おおさか から だ そう だよ。","From Osaka, I heard."]]}},
+
+{t:"Changes over time", jp:"へんか", goal:"Talk about how you've changed: things you can do now and things you no longer do.",
+w:`かわる;to change;変わる
+なれる;to get used to;慣れる
+ようになる;come to (be able to);
+なくなる;to stop / no longer;
+はし;chopsticks;箸
+つかう;to use;使う
+さしみ;sashimi;刺身
+すき;like;好き
+コーヒー;coffee;
+のむ;to drink;飲む
+しゃべる;to chat / talk;喋る
+まえ;before;前
+いま;now;今
+だんだん;gradually;段々`,
+g:[
+{t:"Come to: ～ようになる", d:"Dictionary form or potential + <b>ように なる</b> = gradually come to do / become able to: <b>はし が つかえる ように なった</b> = I've become able to use chopsticks. Great for talking about your progress!",
+ex:["はし が つかえる ように なった|I've become able to use chopsticks.","さしみ が たべられる ように なった|I've come to be able to eat sashimi.","だんだん にほんご が わかる ように なって きた|I've gradually started understanding Japanese."]},
+{t:"No longer: ～なくなる", d:"ない-form: drop い, add <b>く なる</b>: <b>のまなく なった</b> = I don't drink it anymore. With adjectives: <b>さむく なった</b> = it got cold; <b>すき に なった</b> = I came to like it.",
+ex:["まえ は コーヒー を のんでた けど、 のまなく なった|I used to drink coffee, but I stopped.","なっとう が すき に なった|I've come to like natto.","さいきん、 さむく なった ね|It's got cold lately, hasn't it."]}],
+dl:{who:"Host mother", scene:"Looking back on Alex's first months.", lines:[
+["A","アレックス、 にほん に きて かわった ね。","Alex, you've changed since coming to Japan."],
+["B","そう です か？","Have I?"],
+["A","はし も じょうず に つかえる ように なった し。","You've become good with chopsticks, for one."],
+["B","さしみ も たべられる ように なりました！","I can eat sashimi now too!"],
+["A","さいしょ は ぜんぜん しゃべらなかった のに。","Even though at first you didn't talk at all."],
+["B","いま は しゃべりすぎて、 とまらなく なりました。","Now I talk so much I can't stop."]]}},
+
+{t:"Doing favours", jp:"あげる・くれる・もらう", goal:"Talk about doing things for people and people doing things for you.",
+w:`あげる;to give;
+くれる;to give (to me);
+もらう;to receive;
+おしえる;to teach / tell;教える
+てつだう;to help;手伝う
+かす;to lend;貸す
+かりる;to borrow;借りる
+しゅくだい;homework;宿題
+ノート;notebook;
+みち;road / way;道
+つれていく;to take (someone) along;連れて行く
+たすかる;to be a big help;助かる`,
+g:[
+{t:"Doing for others: ～てあげる / ～てくれる", d:"て-form + <b>あげる</b> = do something for someone: <b>おしえて あげる</b>. て-form + <b>くれる</b> = someone does something for me: <b>ゆい が てつだって くれた</b>. Japanese shows gratitude by using くれる.",
+ex:["しゅくだい、 おしえて あげる よ|I'll help you with your homework.","ゆい が ノート を かして くれた|Yui lent me her notebook.","けんた が えき まで つれていって くれた|Kenta took me to the station."]},
+{t:"Getting someone to: ～てもらう", d:"て-form + <b>もらう</b> = have someone do something for you (and be grateful): <b>みち を おしえて もらった</b> = someone showed me the way. Polite request: <b>～て もらえますか</b>.",
+ex:["えきいん さん に みち を おしえて もらった|A station worker showed me the way.","ちょっと てつだって もらえる？|Could you help me a bit?","ありがとう、 たすかった！|Thanks, that was a huge help!"]}],
+dl:{who:"Yui", scene:"Working on homework together.", lines:[
+["A","その しゅくだい、 むずかしい？ おしえて あげよう か？","Is that homework hard? Shall I help you?"],
+["B","ほんと？ ありがとう！ ここ が わからない ん だ。","Really? Thanks! I don't get this part."],
+["A","これ は ね… こう する ん だよ。","This one… you do it like this."],
+["B","あ、 わかった！ たすかった。","Oh, got it! You saved me."],
+["A","きのう は けんた も てつだって くれた の？","Did Kenta help you yesterday too?"],
+["B","うん、 ノート を かして もらった。 みんな やさしい ね。","Yeah, he lent me his notes. Everyone's so kind."]]}},
+
+/* ================= PART 16: Keigo for school & work ================= */
+{t:"Talking to teachers", jp:"せんせい と はなす", goal:"Use respectful Japanese with teachers and older people.",
+w:`いらっしゃる;to be / come / go (respectful);
+おっしゃる;to say (respectful);
+ごらんになる;to see (respectful);ご覧になる
+めしあがる;to eat / drink (respectful);召し上がる
+なさる;to do (respectful);
+ごぞんじ;to know (respectful);ご存じ
+しょくいんしつ;staff room;職員室
+しつれいします;excuse me (entering);失礼します
+しつもん;question;質問
+よろしい;all right (polite);
+おかえりになる;to go home (respectful);お帰りになる
+レポート;report / essay;`,
+g:[
+{t:"Special respectful verbs", d:"For actions of teachers and seniors, swap the verb: いる/いく/くる → <b>いらっしゃる</b>, いう → <b>おっしゃる</b>, みる → <b>ごらんになる</b>, たべる → <b>めしあがる</b>, する → <b>なさる</b>, しっている → <b>ごぞんじ です</b>.",
+ex:["せんせい は しょくいんしつ に いらっしゃいます か|Is the teacher in the staff room?","せんせい が おっしゃった とおり です|It's just as you said, sir.","この しゃしん、 ごらんになりました か|Have you seen this photo?"]},
+{t:"Respectful pattern: お + stem + になる", d:"For most other verbs: <b>お</b> + stem + <b>に なる</b>: かえる → <b>おかえりに なる</b>, まつ → <b>おまちに なる</b>. Entering a teacher's room: <b>しつれいします</b>. Asking politely: <b>しつもん しても よろしい でしょうか</b>.",
+ex:["せんせい は もう おかえりに なりました か|Has the teacher gone home already?","しつれいします。 しつもん しても よろしい でしょうか|Excuse me. May I ask a question?","なに を めしあがります か|What would you like to eat?"]}],
+dl:{who:"Teacher (Mr Sato)", scene:"Alex visits the staff room.", lines:[
+["B","しつれいします。 さとう せんせい は いらっしゃいます か。","Excuse me. Is Mr Sato here?"],
+["A","はい、 わたし です。 どうしました か。","Yes, that's me. What is it?"],
+["B","レポート の こと で しつもん しても よろしい でしょうか。","May I ask a question about the report?"],
+["A","もちろん。 どうぞ。","Of course. Go ahead."],
+["B","せんせい が おっしゃった テーマ が よく わからなくて…","I didn't quite understand the theme you mentioned…"],
+["A","ああ、 じゃあ もう いちど せつめい しましょう。","Ah, then let me explain once more."]]}},
+
+{t:"Humble offers", jp:"けんじょうご", goal:"Offer help and talk about your own actions humbly.",
+w:`おもちします;I'll carry it (humble);お持ちします
+おてつだいします;I'll help (humble);お手伝いします
+いたします;to do (humble);致します
+まいります;to go / come (humble);参ります
+もうします;to be called (humble);申します
+うかがう;to visit / ask (humble);伺う
+はいけん;looking at (humble);拝見
+させていただく;to (humbly) do;
+にもつ;luggage;荷物
+おもい;heavy;重い
+せつめい;explanation;説明
+はっぴょう;presentation;発表`,
+g:[
+{t:"Humble offer: お + stem + します", d:"To offer to do something for a superior: <b>お</b> + stem + <b>します</b>: もつ → <b>おもちします</b> = I'll carry it for you. With する-nouns: <b>ご せつめい します</b>. Special humble verbs: いく → <b>まいります</b>, みる → <b>はいけん します</b>, きく/たずねる → <b>うかがう</b>.",
+ex:["にもつ、 おもちします|Let me carry your luggage.","なに か おてつだい しましょう か|Shall I help with something?","あした、 しょくいんしつ に うかがいます|I'll come to the staff room tomorrow."]},
+{t:"Allow me to: ～させていただきます", d:"<b>～させて いただきます</b> = (with your permission) I will do ~. Very common in presentations and formal greetings: <b>はっぴょう させて いただきます</b>. Don't overuse it in casual life!",
+ex:["では、 はっぴょう させて いただきます|Then allow me to give my presentation.","じこしょうかい させて いただきます|Please allow me to introduce myself.","しりょう を はいけん しました|I have looked at the materials."]}],
+dl:{who:"Teacher (Ms Mori)", scene:"Helping a teacher after class.", lines:[
+["A","あら、 この はこ、 おもい わね。","Oh, this box is heavy."],
+["B","おもちします！","Let me carry it!"],
+["A","ありがとう。 しょくいんしつ まで おねがい できる？","Thank you. Could you take it to the staff room?"],
+["B","はい。 ほか に も なに か おてつだい しましょう か。","Sure. Is there anything else I can help with?"],
+["A","じゃあ、 あした の はっぴょう、 がんばって ね。","Well then, good luck with tomorrow's presentation."],
+["B","はい、 せいいっぱい させて いただきます！","Yes, I'll do my very best!"]]}},
+
+{t:"On the phone", jp:"でんわ", goal:"Make and answer phone calls politely, and leave a message.",
+w:`もしもし;hello (on the phone);
+でんわ;phone / phone call;電話
+かける;to make (a call);
+でる;to answer (the phone);出る
+るす;away / not in;留守
+でんごん;message;伝言
+おりかえし;calling back;折り返し
+いま;now;今
+よろしい;all right (polite);
+しょうしょう;a little (polite);少々
+おまちください;please wait;お待ちください
+もういちど;once more;もう一度`,
+g:[
+{t:"Phone set phrases", d:"Start with <b>もしもし</b>. Say who you are with <b>～と もうします</b>. Ask for someone: <b>～さん は いらっしゃいます か</b>. Hold on: <b>しょうしょう おまちください</b>. Didn't catch it: <b>もう いちど おねがい できます か</b>.",
+ex:["もしもし、 アレックス と もうします|Hello, my name is Alex.","たなか さん は いらっしゃいます か|Is Mr/Ms Tanaka there?","しょうしょう おまちください|Please hold on a moment."]},
+{t:"Messages and call-backs", d:"If they're out: <b>でんごん を おねがい できます か</b> = Could I leave a message? Ask them to call back: <b>おりかえし おでんわ いただけます か</b>. Check if it's OK to talk: <b>いま、 よろしい ですか</b>.",
+ex:["いま、 おでんわ よろしい ですか|Is now a good time to talk?","でんごん を おねがい できます か|Could I leave a message?","おりかえし おでんわ いただけます か|Could you call me back?"]}],
+dl:{who:"Receptionist", scene:"Calling a café about a part-time job.", lines:[
+["A","はい、 カフェ さくら です。","Hello, Café Sakura."],
+["B","もしもし、 アレックス と もうします。 てんちょう は いらっしゃいます か。","Hello, my name is Alex. Is the manager there?"],
+["A","もうしわけありません。 いま るす に して おります。","I'm very sorry. They're out at the moment."],
+["B","そう です か。 でんごん を おねがい できます か。","I see. Could I leave a message?"],
+["A","はい、 どうぞ。","Yes, go ahead."],
+["B","バイト の けん で、 おりかえし おでんわ いただけます か。","It's about the part-time job. Could they call me back?"]]}},
+
+{t:"At the part-time job", jp:"バイト", goal:"Use the standard phrases for working in a shop or café.",
+w:`いらっしゃいませ;welcome (to a shop);
+かしこまりました;certainly;
+おまたせしました;sorry to keep you waiting;お待たせしました
+ごちゅうもん;your order;ご注文
+おきまり;decided (polite);お決まり
+こちら;this (polite);
+ございます;there is / is (polite);
+てんない;in the shop;店内
+おもちかえり;take-away;お持ち帰り
+おさきにしつれいします;excuse me for leaving first;お先に失礼します
+おつかれさまです;thanks for your hard work;お疲れ様です
+シフト;shift;`,
+g:[
+{t:"Serving customers", d:"Key phrases: <b>いらっしゃいませ</b> (welcome), <b>ごちゅうもん は おきまり ですか</b> (are you ready to order?), <b>かしこまりました</b> (certainly), <b>おまたせしました</b> (sorry for the wait), <b>てんない で おめしあがり ですか、 おもちかえり ですか</b> (eat in or take away?).",
+ex:["いらっしゃいませ！ なんめいさま ですか|Welcome! How many people?","ごちゅうもん は おきまり ですか|Are you ready to order?","おまたせしました。 こちら、 コーヒー で ございます|Sorry to keep you waiting. Here is your coffee."]},
+{t:"With coworkers", d:"Greeting at any time of day: <b>おつかれさまです</b>. Leaving before others: <b>おさきに しつれいします</b>. Asking to swap a shift: <b>シフト を かわって もらえませんか</b>.",
+ex:["おつかれさまです！|Hi, thanks for your hard work!","おさきに しつれいします|Excuse me for leaving before you.","らいしゅう の シフト、 かわって もらえませんか|Could you swap next week's shift with me?"]}],
+dl:{who:"Customer", scene:"Alex's first shift at the café.", lines:[
+["B","いらっしゃいませ！ ごちゅうもん は おきまり ですか。","Welcome! Are you ready to order?"],
+["A","カフェラテ を ひとつ おねがいします。","One café latte, please."],
+["B","かしこまりました。 てんない で おめしあがり ですか。","Certainly. Will you be eating in?"],
+["A","いえ、 もちかえり で。","No, take-away."],
+["B","しょうしょう おまちください。","Please wait a moment."],
+["B","おまたせしました。 カフェラテ で ございます。","Sorry to keep you waiting. Here's your café latte."]]}},
+
+/* ================= PART 17: Real-life situations ================= */
+{t:"At the doctor", jp:"びょういん で", goal:"Describe symptoms, understand the doctor and get medicine.",
+w:`ぐあい;condition (health);具合
+ねつ;fever;熱
+せき;cough;咳
+のど;throat;喉
+おなか;stomach;お腹
+はきけ;nausea;吐き気
+いつから;since when;
+くすり;medicine;薬
+しょほうせん;prescription;処方箋
+やっきょく;pharmacy;薬局
+ほけんしょう;health insurance card;保険証
+いちにち;a day;一日
+さんかい;three times;三回
+しょくご;after meals;食後`,
+g:[
+{t:"Describing symptoms", d:"<b>～が いたい です</b> = my ~ hurts. <b>ねつ が あります</b> = I have a fever. <b>せき が でます</b> = I'm coughing. Say since when: <b>きのう から</b>. Feeling sick: <b>ぐあい が わるい ん です</b>.",
+ex:["のど が いたくて、 せき が でます|My throat hurts and I'm coughing.","きのう から ねつ が あります|I've had a fever since yesterday.","おなか が いたくて、 はきけ も ある ん です|My stomach hurts and I feel sick too."]},
+{t:"Understanding instructions", d:"At reception they'll ask for your <b>ほけんしょう</b> (insurance card). For medicine: <b>いちにち さんかい、 しょくご に のんで ください</b> = Take it three times a day after meals. Ask: <b>どう のめば いい ですか</b>.",
+ex:["ほけんしょう を おねがいします|Your insurance card, please.","いちにち さんかい、 しょくご に のんで ください|Take it three times a day after meals.","この くすり、 どう のめば いい ですか|How should I take this medicine?"]}],
+dl:{who:"Doctor", scene:"At a local clinic.", lines:[
+["A","きょう は どう しました か。","What brings you in today?"],
+["B","のど が いたくて、 ねつ も ある ん です。","My throat hurts and I have a fever."],
+["A","いつ から です か。","Since when?"],
+["B","おととい の よる から です。","Since the night before yesterday."],
+["A","かぜ です ね。 くすり を だします から、 いちにち さんかい のんで ください。","It's a cold. I'll give you medicine; take it three times a day."],
+["B","わかりました。 しょくご に のめば いい ですか。","Understood. Should I take it after meals?"]]}},
+
+{t:"Paperwork and offices", jp:"てつづき", goal:"Handle the city office, the bank and forms without panic.",
+w:`てつづき;procedure / paperwork;手続き
+しやくしょ;city hall;市役所
+ぎんこう;bank;銀行
+こうざ;bank account;口座
+ひらく;to open;開く
+もうしこみしょ;application form;申込書
+きにゅう;filling in;記入
+なまえ;name;名前
+じゅうしょ;address;住所
+はんこ;personal seal;判子
+サイン;signature;
+ざいりゅうカード;residence card;在留カード
+まどぐち;counter / window;窓口
+ばんごう;number;番号`,
+g:[
+{t:"I'd like to…: ～たいんですが", d:"Start politely with <b>～たい ん です が…</b> and let the staff take over: <b>こうざ を ひらきたい ん です が</b> = I'd like to open an account… Where?: <b>どの まどぐち です か</b>.",
+ex:["ぎんこう の こうざ を ひらきたい ん です が|I'd like to open a bank account…","じゅうしょ の へんこう を したい ん です が|I'd like to change my address…","どの まどぐち に いけば いい ですか|Which counter should I go to?"]},
+{t:"Filling in forms", d:"Staff will say <b>こちら に ご きにゅう ください</b> (please fill in here). Ask: <b>ここ は なに を かけば いい ですか</b>. No seal? <b>サイン でも いい ですか</b>. Show your <b>ざいりゅうカード</b> (residence card).",
+ex:["こちら に おなまえ と ごじゅうしょ を ご きにゅう ください|Please write your name and address here.","ここ は なに を かけば いい ですか|What should I write here?","はんこ が ない ん です が、 サイン でも いい ですか|I don't have a seal; is a signature OK?"]}],
+dl:{who:"Bank clerk", scene:"Opening a bank account.", lines:[
+["B","すみません、 こうざ を ひらきたい ん です が。","Excuse me, I'd like to open an account."],
+["A","はい。 ざいりゅうカード は おもち ですか。","Certainly. Do you have your residence card?"],
+["B","はい、 これ です。","Yes, here it is."],
+["A","では、 こちら の もうしこみしょ に ご きにゅう ください。","Then please fill in this application form."],
+["B","はんこ が ない ん です が、 サイン でも いい ですか。","I don't have a seal; is a signature OK?"],
+["A","はい、 だいじょうぶ です。 ばんごう で およびします。","Yes, that's fine. We'll call your number."]]}},
+
+{t:"Requests: I want you to…", jp:"たのみごと", goal:"Say what you want others to do, at the hair salon, shops and with friends.",
+w:`ほしい;want;欲しい
+びよういん;hair salon;美容院
+きる;to cut;切る
+みじかく;short (adverb);短く
+すこし;a little;少し
+まえがみ;fringe / bangs;前髪
+そろえる;to even out / trim;揃える
+このぐらい;about this much;
+しゃしん;photo;写真
+ラッピング;gift wrapping;
+ふくろ;bag;袋
+べつべつ;separately;別々`,
+g:[
+{t:"I want you to: ～てほしい", d:"て-form + <b>ほしい</b> = I want (someone) to do: <b>みじかく きって ほしい</b> = I'd like it cut short. Polite and soft: <b>～て ほしい ん です が</b>. Negative: <b>～ないで ほしい</b> = I'd prefer you didn't.",
+ex:["すこし みじかく きって ほしい ん です が|I'd like it cut a little shorter…","まえがみ は そろえる だけ に して ほしい|For the fringe, I'd like just a trim.","あまり みじかく しないで ほしい です|I'd prefer you didn't make it too short."]},
+{t:"Shop requests: ～てもらえますか / ～にしてください", d:"Ask a favour: <b>ラッピング して もらえます か</b> = Could you gift-wrap it? Choose: <b>～に して ください</b> = make it ~: <b>この ぐらい に して ください</b> (showing a photo). <b>べつべつ に</b> = separately.",
+ex:["ラッピング して もらえます か|Could you gift-wrap it?","この しゃしん ぐらい に して ください|Please make it like this photo.","ふくろ は べつべつ に して もらえます か|Could you put them in separate bags?"]}],
+dl:{who:"Hairdresser", scene:"At a hair salon.", lines:[
+["A","きょう は どう しましょう か。","What shall we do today?"],
+["B","すこし みじかく して ほしい ん です が。","I'd like it a little shorter."],
+["A","どの ぐらい に しましょう か。","About how much?"],
+["B","この しゃしん ぐらい に して ください。","Please make it like this photo."],
+["A","かしこまりました。 まえがみ は？","Certainly. And the fringe?"],
+["B","そろえる だけ で おねがいします。","Just a trim, please."]]}},
+
+{t:"Travel and booking", jp:"りょこう", goal:"Book hotels and tickets, ask about times and handle changes.",
+w:`りょこう;trip / travel;旅行
+よやく;reservation;予約
+ホテル;hotel;
+しんかんせん;bullet train;新幹線
+きっぷ;ticket;切符
+していせき;reserved seat;指定席
+じゆうせき;unreserved seat;自由席
+かたみち;one way;片道
+おうふく;return trip;往復
+チェックイン;check-in;
+へんこう;change;変更
+キャンセル;cancellation;
+なんじ;what time;何時
+まどがわ;window side;窓側`,
+g:[
+{t:"Booking: ～を予約したいんですが", d:"<b>～を よやく したい ん です が</b> = I'd like to book ~. For trains: <b>きょうと まで、 おうふく で おねがいします</b>. Seat choice: <b>していせき</b> (reserved) / <b>じゆうせき</b> (unreserved), <b>まどがわ</b> (window side).",
+ex:["こんしゅう の どようび、 ホテル を よやく したい ん です が|I'd like to book a hotel for this Saturday…","きょうと まで、 おうふく で おねがいします|A return ticket to Kyoto, please.","していせき の まどがわ が いい です|A reserved seat by the window, please."]},
+{t:"Times and changes", d:"Ask times: <b>なんじ に でます か</b> / <b>チェックイン は なんじ から ですか</b>. Change or cancel: <b>よやく を へんこう したい ん です が</b>, <b>キャンセル できます か</b>.",
+ex:["つぎ の しんかんせん は なんじ に でます か|What time does the next bullet train leave?","チェックイン は なんじ から ですか|From what time is check-in?","よやく を へんこう したい ん です が|I'd like to change my booking…"]}],
+dl:{who:"Ticket office clerk", scene:"Buying shinkansen tickets.", lines:[
+["B","すみません、 きょうと まで おうふく で おねがいします。","Excuse me, a return ticket to Kyoto, please."],
+["A","していせき と じゆうせき、 どちら に しますか。","Reserved or unreserved?"],
+["B","していせき で、 まどがわ が いい です。","Reserved, window side please."],
+["A","じゅうじ の しんかんせん で よろしい ですか。","Is the 10 o'clock shinkansen OK?"],
+["B","はい。 あと、 かえり は へんこう できます か。","Yes. Also, can I change the return?"],
+["A","はい、 しゅっぱつ まえ なら へんこう できます よ。","Yes, you can change it before departure."]]}},
+
+/* ================= PART 18: Sounding like a native ================= */
+{t:"Fillers and softeners", jp:"ことば の クッション", goal:"Use fillers and softeners so your Japanese sounds natural and kind.",
+w:`なんか;like / kind of;
+えっと;um…;
+あの;um, excuse me;
+ちょっと;a bit (softener);
+かな;I wonder;
+よね;right? (shared feeling);
+じゃん;isn't it? (casual);
+っていうか;I mean / or rather;
+みたいな;like… (quoting);
+まあ;well…;
+べつに;not really;別に
+なんとなく;somehow / just because;何となく`,
+g:[
+{t:"Fillers: えっと / あの / なんか / まあ", d:"Fill silence naturally instead of 'um': <b>えっと</b> (thinking), <b>あの</b> (getting attention / hesitating), <b>なんか</b> (like…), <b>まあ</b> (well…). Using them makes you sound much more natural.",
+ex:["えっと、 なんて いう の かな|Um, how do you say it…","なんか、 きょう ねむい|I'm, like, sleepy today.","まあ、 いい んじゃない？|Well, isn't it fine?"]},
+{t:"Softeners: ちょっと / かな / よね", d:"Soften requests and refusals: <b>ちょっと…</b> alone means 'that's a bit (difficult)', a polite no. <b>～かな</b> = I wonder. <b>～よね</b> = ~, right? (checking you share a feeling).",
+ex:["あした は ちょっと…|Tomorrow's a bit…(difficult).","これ で いい かな|I wonder if this is OK.","この みせ、 おいしい よね|This place is good, right?"]}],
+dl:{who:"Kenta", scene:"Deciding what to do after school.", lines:[
+["A","このあと、 カラオケ いかない？","Want to go to karaoke after this?"],
+["B","えっと、 きょう は ちょっと…","Um, today's a bit…"],
+["A","そっか。 なんか よてい ある の？","I see. Got plans or something?"],
+["B","ううん、 べつに。 なんとなく つかれてて。","No, not really. I'm just kind of tired."],
+["A","まあ、 テスト の あと だし ね。","Well, it's right after the tests."],
+["B","だよね。 らいしゅう なら いける かな。","Right? Maybe I can go next week."]]}},
+
+{t:"Casual speech styles", jp:"くだけた はなしかた", goal:"Understand casual endings, contractions and some youth slang.",
+w:`めっちゃ;super / really;
+やばい;crazy (good or bad);
+まじ;seriously;
+うける;hilarious;
+ガチ;for real;
+きもい;gross;
+むかつく;annoying / it pisses me off;
+ださい;uncool;
+しってる;to know (casual);知ってる
+いってる;to say (casual);言ってる
+しなきゃ;have to do;
+ちゃう;(did) completely;`,
+g:[
+{t:"Contractions you'll hear", d:"Casual speech squeezes words: ～ている → <b>～てる</b>, ～ておく → <b>～とく</b>, ～てしまう → <b>～ちゃう</b>, ～なければ → <b>～なきゃ</b>, ～では → <b>～じゃ</b>. You'll hear these constantly among friends.",
+ex:["なに いってる の？|What are you saying?","あした まで に やっとく|I'll get it done by tomorrow.","もう いかなきゃ|I have to go now."]},
+{t:"Youth slang (understand first!)", d:"<b>めっちゃ</b> = super, <b>やばい</b> = crazy (good or bad), <b>まじ</b> = seriously, <b>うける</b> = that's hilarious, <b>ガチ</b> = for real. Fine with friends, never with teachers or at work. <b>きもい</b>, <b>むかつく</b> are strong: careful.",
+ex:["この ラーメン、 めっちゃ うまい！|This ramen is super good!","まじ で？ うける！|Seriously? Hilarious!","ガチ で やばい|It's seriously crazy."]}],
+dl:{who:"Yui", scene:"Texting about a video.", lines:[
+["A","この どうが みた？ めっちゃ うける よ！","Did you see this video? It's hilarious!"],
+["B","まだ。 なに？","Not yet. What is it?"],
+["A","ねこ が ピアノ ひいてる の。 やばい でしょ。","A cat playing the piano. Crazy, right?"],
+["B","まじ で？ みる みる！","Seriously? I'll watch it!"],
+["B","ガチ で うまい じゃん！","It's actually really good!"],
+["A","でしょ！ しってた？","Right? Did you know?"]]}},
+
+{t:"Sound words", jp:"オノマトペ", goal:"Understand and use common sound and feeling words.",
+w:`どきどき;heart pounding / nervous;
+わくわく;excited;
+いらいら;irritated;
+ぺこぺこ;starving;
+ぐっすり;soundly (sleep);
+にこにこ;smiling;
+ぺらぺら;fluent;
+ゆっくり;slowly / relaxed;
+きらきら;sparkling;
+ざあざあ;pouring (rain);
+ふわふわ;fluffy;
+しっかり;firmly / properly;`,
+g:[
+{t:"Feelings: どきどき / わくわく / いらいら", d:"Japanese uses sound words for feelings, often with <b>する</b>: <b>どきどき する</b> = my heart is pounding, <b>わくわく する</b> = I'm excited, <b>いらいら する</b> = I'm irritated.",
+ex:["あした の はっぴょう、 どきどき する|I'm nervous about tomorrow's presentation.","りょこう、 わくわく する ね|The trip is exciting, isn't it.","でんしゃ が おそくて いらいら した|The train was late and I got irritated."]},
+{t:"States and manner: ぺこぺこ / ぐっすり / ぺらぺら", d:"<b>おなか が ぺこぺこ</b> = starving. <b>ぐっすり ねた</b> = slept soundly. <b>にほんご が ぺらぺら</b> = fluent in Japanese. <b>ざあざあ ふる</b> = pouring with rain. <b>ふわふわ</b> = fluffy.",
+ex:["おなか が ぺこぺこ！|I'm starving!","きのう は ぐっすり ねた|I slept like a log last night.","いつか にほんご が ぺらぺら に なりたい|I want to be fluent in Japanese someday."]}],
+dl:{who:"Kenta", scene:"Before a trip together.", lines:[
+["A","あした の りょこう、 わくわく する ね！","So excited about tomorrow's trip!"],
+["B","うん！ でも、 あめ が ざあざあ ふる らしい よ。","Yeah! But apparently it'll pour with rain."],
+["A","まじ か。 まあ、 おんせん だから だいじょうぶ。","Seriously. Well, it's a hot spring, so it's fine."],
+["B","そうだね。 きょう は ぐっすり ねよう。","True. Let's sleep well tonight."],
+["A","あ、 おなか ぺこぺこ。 なに か たべに いこう。","Ah, I'm starving. Let's go eat something."],
+["B","さんせい！ ふわふわ の パンケーキ が いい！","Agreed! I want fluffy pancakes!"]]}},
+
+{t:"Goodbyes and keeping in touch", jp:"おわかれ", goal:"Give a farewell speech, thank people properly and promise to stay in touch.",
+w:`おせわになりました;thank you for everything;お世話になりました
+わすれません;I won't forget;忘れません
+さびしい;lonely / I'll miss you;寂しい
+れんらく;contact;連絡
+また;again;
+あいにくる;to come to see;会いに来る
+げんきでね;take care;元気でね
+おもいで;memory;思い出
+いちねん;one year;一年
+かんしゃ;gratitude;感謝
+ほんとうに;really;本当に
+こんど;next time;今度`,
+g:[
+{t:"Thanking people properly", d:"<b>いろいろ おせわに なりました</b> = Thank you for everything you've done for me: the essential farewell phrase. Add <b>ほんとうに ありがとうございました</b>. In a speech: <b>この いちねん は いちばん の おもいで です</b>.",
+ex:["いちねん かん、 ほんとうに おせわに なりました|Thank you so much for everything this year.","みなさん の こと は わすれません|I won't forget any of you.","この いちねん は いっしょう の おもいで です|This year is a memory for life."]},
+{t:"Staying in touch", d:"<b>また れんらく する ね</b> = I'll get in touch. <b>ぜったい また あいに くる</b> = I'll definitely come back to see you. Close with <b>げんき で ね</b> (take care) and <b>またね</b>.",
+ex:["また れんらく する ね|I'll be in touch.","ぜったい また あいに くる よ|I'll definitely come back to see you.","さびしく なる ね。 げんき で ね|I'll miss you. Take care."]}],
+dl:{who:"Host family", scene:"Alex's last day in Japan.", lines:[
+["B","いちねん かん、 ほんとうに おせわに なりました。","Thank you so much for everything this year."],
+["A","こちら こそ。 さびしく なる ね。","Likewise. We'll miss you."],
+["B","みなさん の こと は ぜったい わすれません。","I'll never forget all of you."],
+["A","また いつでも あいに きて ね。","Come and see us any time."],
+["B","はい！ かならず また きます。 れんらく します ね。","Yes! I'll definitely come again. I'll keep in touch."],
+["A","げんき で ね。 またね！","Take care. See you!"]]}},
+);
+
 const GLOSS_RAW = `は|topic marker (said "wa"): "as for…"
 です|polite "is / am / are"
 やすみ|day off, rest
@@ -2576,6 +3264,150 @@ const GLOSS2_RAW = `はなせます|can speak: はなす → potential はなせ
 おたがい|each other`;
 GLOSS2_RAW.split("\n").forEach(l => { const i = l.indexOf("|"); if (i > 0) GLOSS[l.slice(0, i)] = l.slice(i + 1); });
 
+const GLOSS3_RAW = `んです|(explaining) the thing is…: polite form of んだ
+んだ|(explaining) the thing is… / you see
+んですか|is it that…? (asking for an explanation, polite)
+めずらしい|unusual / rare
+つかれてる|tired: つかれる → つかれている → つかれてる
+おそく|late (adverb): おそい → おそく
+してた|was doing: する → していた → してた
+がんばって|good luck / do your best: がんばる → て-form
+よさそう|looks good: いい → よさそう (irregular)
+こんでる|is crowded: こむ → こんでいる → こんでる
+たこやき|takoyaki (octopus balls)
+のころう|let's stay: のこる → volitional のころう
+たべてみる|try eating: たべる → たべて + みる
+やってみたい|want to try doing: やる → やって + みたい
+きてみて|try on (and see): きる → きて + みて
+ですか|is it? (polite question)
+うたってみたら|why don't you try singing: うたう → うたって + みたら
+ねよう|let's sleep / I'll sleep: ねる → volitional ねよう
+ように|so that / (try) to
+あきらめないで|don't give up: あきらめる → ないで
+やってみよう|let's try: やる → やって + みよう
+うたってみて|try singing: うたう → うたって + みて
+ええ|what? / eh? (surprise)
+やってみたら|why don't you try: やる → やって + みたら
+うたってみる|I'll try singing: うたう → うたって + みる
+やすんだら|if you rest / why don't you rest: やすむ → やすんだら
+でかけたら|if you go out: でかける → でかけたら
+いきたがってる|(someone) wants to go: いく → いきたがる → ている
+ほしがってる|(someone) wants: ほしい → ほしがる → ている
+あいたい|want to see (someone): あう → あいたい
+さみしがってる|(someone) feels lonely: さみしい → さみしがる → ている
+ビデオ|video
+きたがってる|(someone) wants to come: くる → きたがる → ている
+よんだら|why not invite (her): よぶ → よんだら
+ですね|isn't it? / right (polite)
+きいてみます|I'll try asking: きく → きいて + みます
+こうこう|high school
+たとえば|for example
+じゆう|free / freedom
+らく|easy / comfortable
+だし|and also (giving reasons): だ + し
+わるく|bad (adverb, before ない): わるい → わるく
+による|depends on
+ちゅう|during
+じしょ|dictionary
+じゃ|(casual for では) is not / then
+ことし|this year
+きょねん|last year
+さむく|cold (before ない / なる): さむい → さむく
+いそがしく|busy (before ない): いそがしい → いそがしく
+し|and also (listing reasons)
+なの|the thing that… is (explanatory)
+もってくれば|if I had brought: もってくる → ば-form
+ねれば|if I had slept: ねる → ば-form
+あんな|that kind of
+いわなければ|if I hadn't said: いう → いわない → ければ
+はれる|to be sunny / clear up
+あえたら|if we can meet: あう → あえる → たら
+すれば|if I had done: する → ば-form
+できたら|if we could: できる → たら
+あけたら|when I opened: あける → たら
+いなかった|wasn't there (people): いる → いなかった
+でて|having left: でる → て-form
+つけたら|when I turned on: つける → たら
+けっきょく|in the end
+かえったら|when I got home: かえる → たら
+ホストファミリー|host family
+おどろいた|was surprised: おどろく → た
+ないちゃった|ended up crying: なく → ないてしまった → ないちゃった
+よると|according to: による → と
+つかえる|can use: つかう → potential
+なって|becoming: なる → て-form
+のんでた|was drinking (used to): のむ → のんでいた → のんでた
+のまなく|not drinking (before なる): のむ → のまない → のまなく
+かわった|changed: かわる → た
+しゃべらなかった|didn't talk: しゃべる → しゃべらなかった
+しゃべりすぎて|talk too much: しゃべる → しゃべりすぎる → て
+とまらなく|can't stop (before なる): とまる → とまらない → とまらなく
+つれていって|take (someone) along: つれていく → て-form
+えきいん|station worker
+もらえる|can receive / could you (do for me): もらう → potential
+たすかった|you saved me / that helped: たすかる → た
+あげよう|shall I (do for you): あげる → volitional
+こう|like this
+おっしゃった|said (respectful): おっしゃる → た
+とおり|just as / the way
+ごらんになりました|saw (respectful): ごらんになる → ました
+おかえりに|go home (respectful, お～になる)
+しても|even if I do / may I (do): する → しても
+でしょうか|would it be? (very polite question)
+めしあがります|will eat (respectful): めしあがる → ます
+さとう|Sato (family name)
+どうしました|what happened? / what's wrong? (polite)
+テーマ|theme / topic
+わからなくて|didn't understand, and…: わかる → わからない → くて
+おてつだい|help (humble/polite)
+うかがいます|I will visit / ask (humble): うかがう → ます
+しりょう|materials / documents
+あら|oh! (surprise, often used by women)
+はこ|box
+わね|(soft sentence ending)
+せいいっぱい|with all my might
+おでんわ|phone call (polite)
+けん|matter / about
+おさきに|before you / first (polite)
+かわって|swap / take my place: かわる → て-form
+もらえませんか|could you (please)…?: もらう → もらえる → ませんか
+カフェラテ|café latte
+おめしあがり|eating (respectful): めしあがる
+もちかえり|take-away
+いたくて|hurts, and…: いたい → いたくて
+のめば|if I take (medicine): のむ → ば-form
+おととい|the day before yesterday
+だします|will give out (prescribe): だす → ます
+ひらきたい|want to open: ひらく → たい
+おなまえ|name (polite)
+ごじゅうしょ|address (polite)
+かけば|if I write: かく → ば-form
+およびします|will call (you) (humble): よぶ → お～します
+きって|cut: きる → て-form
+しますか|will you do? (polite)
+このあと|after this
+つかれてて|being tired, and…: つかれている → つかれてて
+やっとく|do in advance: やっておく → やっとく
+いかなきゃ|have to go: いく → いかなければ → いかなきゃ
+うまい|tasty / good at (casual)
+どうが|video (online)
+みた|saw / watched: みる → た
+ひいてる|is playing (an instrument): ひく → ひいている → ひいてる
+しってた|did you know: しる → しっていた → しってた
+おそくて|being late, and…: おそい → おそくて
+そうだね|that's right
+たべに|to eat (purpose): たべる → stem + に
+パンケーキ|pancakes
+かん|period (of time)
+おせわに|(you've looked after me): おせわ + に
+みなさん|everyone (polite)
+いっしょう|lifetime
+あいに|to see (purpose): あう → stem + に
+さびしく|lonely (before なる): さびしい → さびしく
+こそ|(it is) I who… / likewise
+かならず|definitely / without fail`;
+GLOSS3_RAW.split("\n").forEach(l => { const i = l.indexOf("|"); if (i > 0 && !GLOSS[l.slice(0, i)]) GLOSS[l.slice(0, i)] = l.slice(i + 1); });
+
 /* ================= KANA ENGINE ================= */
 const KT = "あ a|い i|う u|え e|お o|か ka|き ki|く ku|け ke|こ ko|さ sa|し shi si|す su|せ se|そ so|た ta|ち chi ti|つ tsu tu|て te|と to|な na|に ni|ぬ nu|ね ne|の no|は ha|ひ hi|ふ fu hu|へ he|ほ ho|ま ma|み mi|む mu|め me|も mo|や ya|ゆ yu|よ yo|ら ra|り ri|る ru|れ re|ろ ro|わ wa|を wo|が ga|ぎ gi|ぐ gu|げ ge|ご go|ざ za|じ ji zi|ず zu|ぜ ze|ぞ zo|だ da|ぢ ji di|づ zu du|で de|ど do|ば ba|び bi|ぶ bu|べ be|ぼ bo|ぱ pa|ぴ pi|ぷ pu|ぺ pe|ぽ po|きゃ kya|きゅ kyu|きょ kyo|しゃ sha sya|しゅ shu syu|しょ sho syo|しぇ she sye|ちゃ cha cya tya|ちゅ chu cyu tyu|ちょ cho cyo tyo|ちぇ che cye|にゃ nya|にゅ nyu|にょ nyo|ひゃ hya|ひゅ hyu|ひょ hyo|みゃ mya|みゅ myu|みょ myo|りゃ rya|りゅ ryu|りょ ryo|ぎゃ gya|ぎゅ gyu|ぎょ gyo|じゃ ja jya zya|じゅ ju jyu zyu|じょ jo jyo zyo|じぇ je jye|びゃ bya|びゅ byu|びょ byo|ぴゃ pya|ぴゅ pyu|ぴょ pyo|ふぁ fa|ふぃ fi|ふぇ fe|ふぉ fo|てぃ ti thi|でぃ di dhi|でゅ dyu dhu|うぃ wi|うぇ we|ゔ vu|ゔぁ va|ゔぃ vi|ゔぇ ve|ゔぉ vo|ぁ xa la|ぃ xi li|ぅ xu lu|ぇ xe le|ぉ xo lo|ゃ xya lya|ゅ xyu lyu|ょ xyo lyo|っ xtu ltu xtsu|ん xn";
 const R2K = {}, K2R = {};
@@ -2931,13 +3763,13 @@ function render() {
     const el = $("#ans"); if (el) { try { el.focus({ preventScroll: true }); } catch (e) {} }
     return;
   }
-  const titles = { today: "Today", path: "Lessons", talk: "Talk", stats: "Stats", browse: "Words", add: "Add a word", kana: "Kana", settings: "Settings", word: "Word" };
-  const inUnit = ["unit", "grammar", "dialog"].includes(S.view), backable = inUnit || S.view === "settings" || S.view === "add" || S.view === "kana" || S.view === "word";
+  const titles = { today: "Today", path: "Lessons", talk: "Talk", stats: "Stats", browse: "Words", add: "Add a word", kana: "Kana", settings: "Settings", word: "Word", read: "Reading", story: "Reading" };
+  const inUnit = ["unit", "grammar", "dialog"].includes(S.view), backable = inUnit || S.view === "settings" || S.view === "add" || S.view === "kana" || S.view === "word" || S.view === "read" || S.view === "story";
   const head = inUnit ? esc(UNITS[S.unit - 1].code + " · " + UNITS[S.unit - 1].t) : `<span class="jp">日本語</span>${titles[S.view]}`;
   top.innerHTML = `${backable ? `<button class="icon-btn" data-a="back" aria-label="Back">${I.back}</button>` : ""}<h1>${head}</h1>${S.view !== "settings" ? `<button class="icon-btn" data-a="nav" data-v="settings" aria-label="Settings">${I.gear}</button>` : ""}`;
-  const cur = inUnit ? "path" : S.view === "word" ? (S.wordFrom === "unit" ? "path" : S.wordFrom || "browse") : S.view === "kana" ? (S.kanaFrom || "browse") : S.view;
+  const cur = inUnit || S.view === "read" || S.view === "story" ? (S.view === "read" || S.view === "story" ? (S.readFrom === "today" ? "today" : "path") : "path") : S.view === "word" ? (S.wordFrom === "unit" ? "path" : S.wordFrom || "browse") : S.view === "kana" ? (S.kanaFrom || "browse") : S.view;
   nav.innerHTML = [["today", "Today", I.home], ["path", "Lessons", I.line], ["talk", "Talk", I.chat], ["browse", "Words", I.words], ["stats", "Stats", I.stats]].map(([v, l, ic]) => `<button data-a="nav" data-v="${v}" ${cur === v ? 'aria-current="page"' : ""}>${ic}<span>${l}</span></button>`).join("");
-  main.innerHTML = ({ today: renderToday, path: renderPath, unit: renderUnit, grammar: renderGrammarRead, dialog: renderDialog, browse: renderBrowse, kana: renderKana, settings: renderSettings, talk: renderTalk, add: renderAdd, stats: renderStats, word: renderWord })[S.view]();
+  main.innerHTML = ({ today: renderToday, path: renderPath, unit: renderUnit, grammar: renderGrammarRead, dialog: renderDialog, browse: renderBrowse, kana: renderKana, settings: renderSettings, talk: renderTalk, add: renderAdd, stats: renderStats, word: renderWord, read: renderReadList, story: renderStory })[S.view]();
   main.classList.toggle("talkmode", S.view === "talk" && !!S.talk);
   if (S.view === "talk") talkAfterRender();
   uiSave();
@@ -3360,8 +4192,12 @@ document.addEventListener("change", e => {
   if (e.target.id === "impFile" && e.target.files && e.target.files[0]) { const r = new FileReader(); r.onload = () => restoreFrom(r.result); r.readAsText(e.target.files[0]); e.target.value = ""; }
 });
 document.addEventListener("compositionend", e => { if (e.target.id === "ans") setTimeout(() => convertInPlace(e.target), 0); });
+// one press of Enter / the keyboard's OK = one step (no double-skips from key repeat or two handlers)
+let _lastEnter = 0;
+function enterTooSoon(e) { if (e.key !== "Enter") return false; if (e.repeat) return true; const now = Date.now(); if (now - _lastEnter < 350) return true; _lastEnter = now; return false; }
 document.addEventListener("keydown", e => {
   if (e.isComposing) return;
+  if (e.key === "Enter" && e.target.id !== "talkIn" && enterTooSoon(e)) { e.preventDefault(); return; }
   if (S.sess && e.key === "Enter") { const p = $("[data-primary]"); if (p) { e.preventDefault(); p.click(); } return; }
   if (S.view !== "study") return;
   if (e.key === "Enter") { const p = $("[data-primary]"); if (p) { e.preventDefault(); p.click(); } return; }
@@ -3374,7 +4210,7 @@ document.addEventListener("click", e => {
   const a = b.dataset.a;
   switch (a) {
     case "nav": stopSpeak(); S.sess = null; S.playing = -1; S.view = b.dataset.v; S.confirmReset = false; render(); $("#main").scrollTop = 0; break;
-    case "back": stopSpeak(); S.playing = -1; S.view = S.view === "unit" ? "path" : S.view === "settings" ? "today" : S.view === "word" ? (S.wordFrom || "browse") : S.view === "kana" ? (S.kanaFrom || "browse") : S.view === "add" ? "browse" : "unit"; S.confirmReset = false; render(); $("#main").scrollTop = 0; break;
+    case "back": stopSpeak(); S.playing = -1; S.view = S.view === "unit" ? "path" : S.view === "settings" ? "today" : S.view === "word" ? (S.wordFrom || "browse") : S.view === "story" ? "read" : S.view === "read" ? (S.readFrom || "path") : S.view === "kana" ? (S.kanaFrom || "browse") : S.view === "add" ? "browse" : "unit"; S.confirmReset = false; render(); $("#main").scrollTop = 0; break;
     case "openUnit": stopSpeak(); S.sess = null; S.unit = +b.dataset.n; S.view = "unit"; render(); $("#main").scrollTop = 0; break;
     case "addWords": addWords(+b.dataset.n); break;
     case "grammar": S.unit = +b.dataset.n; S.view = "grammar"; render(); $("#main").scrollTop = 0; break;
@@ -3829,7 +4665,7 @@ document.addEventListener("click", e => {
   else if (a === "talkRetry" && S.talk) { e.stopImmediatePropagation(); S.talk.err = ""; talkCall(); }
   else if (a === "talkFixBd" && S.talk) { e.stopImmediatePropagation(); const m = S.talk.msgs[+b.dataset.i]; if (m) { m.fixOpen = !m.fixOpen; talkUpdate(false); } }
   else if (a === "talkEn" && S.talk) { e.stopImmediatePropagation(); const m = S.talk.msgs[+b.dataset.i]; if (m) { m.showEn = !m.showEn; talkUpdate(false); uiSave(); } }
-  else if (a === "talkEnd") { e.stopImmediatePropagation(); talkEndNow(); render(); }
+  else if (a === "talkEnd") { e.stopImmediatePropagation(); const r = typeof buildRecap === "function" && S.talk && S.talk.msgs.some(m => m.me) ? buildRecap(S.talk) : null; talkEndNow(); S.talkRecap = r; render(); $("#main").scrollTop = 0; }
   else if (a === "nav" && S.talk && b.dataset.v !== "talk") { stopSpeak(); }
 }, true);
 
@@ -4044,7 +4880,7 @@ function renderStats() {
 }
 
 /* ================= Daily plan, write-it cards, listening cards, leeches, spaces ================= */
-const MONTHS_ALL = ["Survive & introduce yourself", "Get around town", "Talk like a friend", "Go out & feel things", "Share plans & opinions", "Sound natural", "Can, must, should", "Time, reasons, conditions", "Polite Japanese", "Things that happen to you", "Decisions & texting", "Real conversations"];
+const MONTHS_ALL = ["Survive & introduce yourself", "Get around town", "Talk like a friend", "Go out & feel things", "Share plans & opinions", "Sound natural", "Can, must, should", "Time, reasons, conditions", "Polite Japanese", "Things that happen to you", "Decisions & texting", "Real conversations", "Natural casual speech", "Opinions & discussion", "Telling stories well", "Keigo for school & work", "Real-life situations", "Sounding like a native"];
 
 /* ---- spaces between words in lesson sentences ---- */
 function sp(jp, u) {
@@ -4492,7 +5328,7 @@ document.addEventListener("click", e => {
   else if (a === "toughNext") toughNext();
   else if (a === "toughTrick") toughTrick();
 }, true);
-document.addEventListener("keydown", e => { if (e.key === "Enter" && !e.isComposing && S.sess && S.sess.type === "tough") { const p = $("[data-primary]"); if (p) { e.preventDefault(); p.click(); } } }, true);
+document.addEventListener("keydown", e => { if (e.key === "Enter" && !e.isComposing && S.sess && S.sess.type === "tough" && !enterTooSoon(e)) { const p = $("[data-primary]"); e.preventDefault(); e.stopImmediatePropagation(); if (p) p.click(); } }, true);
 function toughDoneHtml(s) {
   const hard = s.words.filter(w => w.miss >= 2).map(w => BYK[w.k].topic);
   return `<div class="done-hero"><div class="jp">${s.stats.bad === 0 ? "かんぺき！" : "よくできた！"}</div><p class="muted">${s.words.length} tough word${s.words.length > 1 ? "s" : ""}, each recalled 3 times in a row. Your next review of them will feel easier. This drill doesn't change their schedule.</p>
@@ -4899,7 +5735,7 @@ document.addEventListener("click", e => {
   else if (a === "kCheck") kCheckTyped(false);
   else if (a === "kGiveup") kCheckTyped(true);
 }, true);
-document.addEventListener("keydown", e => { if (e.key === "Enter" && !e.isComposing && S.sess && S.sess.type === "kana") { const p = $("[data-primary]"); if (p) { e.preventDefault(); p.click(); } } }, true);
+document.addEventListener("keydown", e => { if (e.key === "Enter" && !e.isComposing && S.sess && S.sess.type === "kana" && !enterTooSoon(e)) { const p = $("[data-primary]"); e.preventDefault(); e.stopImmediatePropagation(); if (p) p.click(); } }, true);
 // focus the typing box when it appears
 const _render2 = render;
 render = function () { _render2(); if (S.sess && S.sess.type === "kana") { const el = $("#kAns"); if (el) { try { el.focus({ preventScroll: true }); } catch (e) {} } } };
@@ -4957,6 +5793,611 @@ function kWordOk(v, w) {
   return got === h || got.replace(/ー/g, "") === h.replace(/ー/g, "") || col(v) === col(target) || col(v) === col(noBar);
 }
 
+/* ---- Optional lives (hearts) for every kana round: a mistake costs one, at zero the round ends ---- */
+const kLives = () => +(state.settings.klives || 0);
+for (const fn of ["startKanaLesson", "startKanaPractice", "startKanaFree"]) {
+  const orig = window[fn];
+  window[fn] = function (...args) { orig.apply(this, args); const s = S.sess; if (s && s.type === "kana") { s.maxLives = s.lives = kLives(); s.again = { fn, args }; if (s.maxLives) render(); } };
+}
+startKanaLesson = window.startKanaLesson; startKanaPractice = window.startKanaPractice; startKanaFree = window.startKanaFree;
+const _kResult0 = kResult;
+kResult = function (ok) { const s = S.sess; if (!ok && s && s.maxLives && s.lives > 0) { s.lives--; if (s.lives === 0) s.out = true; } _kResult0(ok); };
+const _kNext0 = kNext;
+kNext = function () {
+  const s = S.sess;
+  if (s && s.out) {
+    s.finished = true; s.failed = true;
+    if (s.free && s.endless) { state.kana = state.kana || {}; const key = [s.opt.sys, s.opt.set, s.opt.mode, s.opt.dir, s.maxLives].join("-"); const best = state.kana.best = state.kana.best || {}; s.prevBest = best[key] || 0; if (s.stats.ok > s.prevBest) best[key] = s.stats.ok; }
+    save(); render(); return;
+  }
+  _kNext0();
+};
+const _kRend0 = renderers.kana;
+renderers.kana = () => {
+  const s = S.sess; let h = _kRend0();
+  if (!s.maxLives) return h;
+  const hearts = `<div class="hearts" aria-label="${s.lives} of ${s.maxLives} lives">${Array.from({ length: s.maxLives }, (_, i) => `<span class="${i < s.lives ? "on" : ""}">${i < s.lives ? "❤️" : "🤍"}</span>`).join("")}${s.endless ? `<span class="small muted hscore">${s.stats.ok} right</span>` : ""}</div>`;
+  if (s.out) h = h.replace('data-a="kNext" data-primary>Next</button>', 'data-a="kNext" data-primary>Out of lives · see results</button>');
+  return hearts + h;
+};
+const _kDone0 = kanaDoneHtml;
+kanaDoneHtml = function (s) {
+  if (!s.failed) return _kDone0(s);
+  const g = s.gid ? KG[s.sys].find(x => x.id === s.gid) : null;
+  const newBest = s.free && s.endless && s.stats.ok > (s.prevBest || 0);
+  return `<div class="done-hero"><div class="bigemo">💔</div><div class="jp">ざんねん！</div>
+    <p class="muted">${g ? `Out of lives in <b>${esc(g.t)}</b>. The row isn't marked as learned yet. Try it again: the characters you missed will feel easier now.` : s.endless ? `You got <b>${s.stats.ok}</b> right before running out of lives.${newBest ? " New best! 🎉" : s.prevBest ? ` Your best: ${s.prevBest}.` : ""}` : `Out of lives after ${s.stats.ok + s.stats.bad} questions.`}</p>
+    <div class="stats" style="width:100%"><div><b>${s.stats.ok}</b><span>right</span></div><div><b>${s.stats.bad}</b><span>missed</span></div><div><b>${s.maxLives}</b><span>lives</span></div></div></div>
+    <button class="btn wide" data-a="kAgain">Try again</button>
+    <button class="btn ghost wide" data-a="kanaOpen">Back to kana</button>
+    <p class="small muted" style="text-align:center">Lives are optional: switch them off on the Kana screen.</p>`;
+};
+const _kFreeCard0 = kFreeCard;
+kFreeCard = function () {
+  const v = kLives();
+  return `<section class="card row klives"><span class="grow"><b>Lives</b> <span class="small muted">· lose one per mistake, at zero the round ends</span></span>
+    <div class="seg kseg" role="group">${[[0, "Off"], [3, "❤️ 3"], [5, "❤️ 5"]].map(([n, l]) => `<button data-a="kLives" data-v="${n}" aria-pressed="${v === n}">${l}</button>`).join("")}</div></section>` + _kFreeCard0();
+};
+document.addEventListener("click", e => {
+  const b = e.target.closest("[data-a]"); if (!b) return;
+  if (b.dataset.a === "kLives") { e.stopImmediatePropagation(); state.settings.klives = +b.dataset.v; save(); const y = $("#main").scrollTop; render(); $("#main").scrollTop = y; }
+  else if (b.dataset.a === "kAgain") { e.stopImmediatePropagation(); const s = S.sess; if (s && s.again) { const { fn, args } = s.again; if (fn === "startKanaFree") Object.assign(kFreeOpt(), s.opt); window[fn](...args); } }
+}, true);
+
+/* ================= Two tabs open: always share the newest progress ================= */
+// Every save writes to this device's storage at once. When another tab saves, this tab picks up that
+// newer progress straight away, so an old tab left open can never save over newer work.
+window.addEventListener("storage", e => {
+  if (e.key !== LS || !e.newValue) return;
+  try {
+    const o = JSON.parse(e.newValue);
+    if ((o.updatedAt || 0) <= (state.updatedAt || 0)) return;
+    state = mergeState(o); hadLocal = true;
+    registerCustom();
+    if (remoteRef) { dirty = true; clearTimeout(saveTimer); saveTimer = setTimeout(flush, 2500); } // harmless double-send, never loses data
+    if (!S.sess && S.view !== "study" && S.view !== "talk") render();
+  } catch (err) {}
+});
+// coming back to a tab after a while: check storage for anything newer first
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState !== "visible") return;
+  try {
+    const raw = localStorage.getItem(LS); if (!raw) return;
+    const o = JSON.parse(raw);
+    if ((o.updatedAt || 0) > (state.updatedAt || 0)) { state = mergeState(o); registerCustom(); if (!S.sess && S.view !== "study" && S.view !== "talk") render(); }
+  } catch (err) {}
+});
+
+/* ================= Numbers drill: prices, times, dates, ages, people ================= */
+const N_D = ["", "いち", "に", "さん", "よん", "ご", "ろく", "なな", "はち", "きゅう"];
+const N_HY = ["", "ひゃく", "にひゃく", "さんびゃく", "よんひゃく", "ごひゃく", "ろっぴゃく", "ななひゃく", "はっぴゃく", "きゅうひゃく"];
+const N_SE = ["", "せん", "にせん", "さんぜん", "よんせん", "ごせん", "ろくせん", "ななせん", "はっせん", "きゅうせん"];
+function n2k(n) {
+  if (n === 0) return "ゼロ";
+  let out = "";
+  const man = Math.floor(n / 10000), r = n % 10000;
+  if (man) out += n2k(man) + "まん";
+  const th = Math.floor(r / 1000), hu = Math.floor(r % 1000 / 100), te = Math.floor(r % 100 / 10), on = r % 10;
+  out += N_SE[th] + N_HY[hu] + (te ? (te === 1 ? "" : N_D[te]) + "じゅう" : "") + N_D[on];
+  return out;
+}
+const N_HOUR = ["", "いち", "に", "さん", "よ", "ご", "ろく", "しち", "はち", "く", "じゅう", "じゅういち", "じゅうに"];
+const N_MINU = ["", "いっぷん", "にふん", "さんぷん", "よんぷん", "ごふん", "ろっぷん", "ななふん", "はっぷん", "きゅうふん"];
+function minK(m) {
+  const te = Math.floor(m / 10), on = m % 10;
+  if (!on) return (te === 1 ? "" : N_D[te]) + "じゅっぷん";
+  return (te ? (te === 1 ? "" : N_D[te]) + "じゅう" : "") + N_MINU[on];
+}
+const N_MON = ["", "いちがつ", "にがつ", "さんがつ", "しがつ", "ごがつ", "ろくがつ", "しちがつ", "はちがつ", "くがつ", "じゅうがつ", "じゅういちがつ", "じゅうにがつ"];
+const N_DAYS = { 1: "ついたち", 2: "ふつか", 3: "みっか", 4: "よっか", 5: "いつか", 6: "むいか", 7: "なのか", 8: "ようか", 9: "ここのか", 10: "とおか", 14: "じゅうよっか", 20: "はつか", 24: "にじゅうよっか" };
+function dayK(d) { if (N_DAYS[d]) return N_DAYS[d]; const te = Math.floor(d / 10), on = d % 10; const ones = on === 7 ? "しち" : on === 9 ? "く" : N_D[on]; return (te === 1 ? "" : N_D[te]) + "じゅう" + ones + "にち"; }
+function ageK(a) {
+  if (a === 20) return "はたち";
+  const on = a % 10, rest = a - on;
+  const pre = rest ? n2k(rest) : "";
+  if (on === 0) return pre.replace(/じゅう$/, "じゅっ") + "さい";
+  if (on === 1) return pre + "いっさい"; if (on === 8) return pre + "はっさい";
+  return pre + N_D[on] + "さい";
+}
+const N_PPL = ["", "ひとり", "ふたり", "さんにん", "よにん", "ごにん", "ろくにん", "しちにん", "はちにん", "きゅうにん", "じゅうにん"];
+const rnd = (a, b) => a + Math.floor(Math.random() * (b - a + 1));
+function nPrice() {
+  const r = Math.random(); let n;
+  if (r < 0.35) n = rnd(10, 99) * 10 - (Math.random() < 0.4 ? 2 : 0);
+  else if (r < 0.8) n = rnd(100, 999) * 10;
+  else if (r < 0.95) n = rnd(10, 99) * 100 + (Math.random() < 0.5 ? rnd(1, 9) * 10 : 0);
+  else n = rnd(10, 300) * 1000;
+  return { cat: "price", jp: n2k(n) + "えん", ans: String(n), show: "¥" + n.toLocaleString("en"), q: "How much?" };
+}
+function nTime() {
+  const h = rnd(1, 12), mm = [0, 0, 5, 10, 15, 20, 30, 30, 45, 50, rnd(1, 59)][rnd(0, 10)];
+  const half = mm === 30 && Math.random() < 0.6;
+  const jp = N_HOUR[h] + "じ" + (mm ? (half ? "はん" : minK(mm)) : "");
+  return { cat: "time", jp, ans: h + ":" + String(mm).padStart(2, "0"), show: h + ":" + String(mm).padStart(2, "0"), q: "What time?" };
+}
+function nDate() {
+  const m = rnd(1, 12), dmax = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][m], d = Math.random() < 0.5 ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 14, 20, 24][rnd(0, 12)] : rnd(1, dmax);
+  return { cat: "date", jp: N_MON[m] + dayK(d), ans: m + "/" + d, show: m + "/" + d + " (" + new Date(2026, m - 1, d).toLocaleDateString("en", { month: "long", day: "numeric" }) + ")", q: "What date? (month/day)" };
+}
+function nAge() { const a = Math.random() < 0.3 ? [1, 8, 10, 18, 20, 21, 30, 40][rnd(0, 7)] : rnd(1, 89); return { cat: "age", jp: ageK(a), ans: String(a), show: a + " years old", q: "How old?" }; }
+function nPeople() { const p = rnd(1, 10); return { cat: "people", jp: N_PPL[p], ans: String(p), show: p + (p > 1 ? " people" : " person"), q: "How many people?" }; }
+const N_GEN = { price: nPrice, time: nTime, date: nDate, age: nAge, people: nPeople };
+function nOpts(it) {
+  const out = new Set([it.jp]); let tries = 0;
+  while (out.size < 4 && tries++ < 60) { const o = N_GEN[it.cat](); if (o.ans !== it.ans) out.add(o.jp); }
+  return shuffle([...out]);
+}
+function nNorm(v, cat) {
+  v = String(v).trim().replace(/[０-９]/g, c => String.fromCharCode(c.charCodeAt(0) - 0xFEE0)).replace(/[¥￥円,\s]/g, "").replace(/えん$/, "");
+  if (cat === "time") { v = v.replace(/[時じ]/, ":").replace(/[分ふんぷん]+$/, "").replace(/半|はん/, "30").replace(/[.h]/, ":"); if (/^\d{3,4}$/.test(v)) v = v.slice(0, -2) + ":" + v.slice(-2); const [h, m] = v.split(":"); return (+h) + ":" + String(+(m || 0)).padStart(2, "0"); }
+  if (cat === "date") { v = v.replace(/[月がつ]+/, "/").replace(/[日にち]+$/, "").replace(/[-.]/, "/"); const [m, d] = v.split("/"); return (+m) + "/" + (+d); }
+  return String(+v.replace(/[^\d]/g, ""));
+}
+function startNumbers(cats, mode) {
+  const o = state.settings.numOpt = Object.assign({ cats: ["price", "time", "date", "age", "people"], mode: "mix" }, state.settings.numOpt || {});
+  if (cats) o.cats = cats; if (mode) o.mode = mode;
+  const items = [];
+  for (let i = 0; i < 12; i++) {
+    const it = N_GEN[o.cats[i % o.cats.length]]();
+    const kind = o.mode === "mix" ? ["hear", "hear", "read", "pick"][i % 4] : o.mode;
+    it.kind = kind; if (kind === "pick") it.opts = nOpts(it);
+    items.push(it);
+  }
+  S.sess = { type: "nums", items: shuffle(items), i: 0, phase: "ask", stats: { ok: 0, bad: 0 } };
+  render(); $("#main").scrollTop = 0; nAuto();
+}
+function nAuto() { const s = S.sess, it = s && s.items[s.i]; if (it && it.kind === "hear") speak(it.jp); }
+function nSlow(t) { const r = state.settings.rate; state.settings.rate = Math.max(0.5, (r || 0.9) * 0.7); speak(t); state.settings.rate = r; }
+renderers.nums = () => {
+  const s = S.sess, it = s.items[s.i];
+  const head = t => `<div class="typetag">${esc(t)}${it.retry ? " · again" : ""}</div>`;
+  const play = `<div class="kq hearbtns"><button class="speaker" data-a="say" data-t="${esc(it.jp)}" aria-label="Play">${I.sound}</button><button class="chip" data-a="nSlow">🐢 Slower</button></div>`;
+  if (s.phase !== "ask") {
+    const ok = s.phase === "right";
+    return `${head(it.q)}<div class="feedback ${ok ? "ok" : "no"}">${ok ? "Correct!" : "It was " + esc(it.show) + "."}</div>
+      <div class="flash back"><div class="fc-word">${esc(it.show)}</div><div class="jp fc-en">${esc(it.jp)}</div><div class="small muted">${esc(kana2roma(it.jp))}</div>
+      <button class="chip" data-a="say" data-t="${esc(it.jp)}">${I.sound} Hear it</button></div>
+      <button class="btn wide" data-a="nNext" data-primary>Next</button>`;
+  }
+  const input = ph => `<div class="answer"><input id="nAns" type="text" inputmode="${it.cat === "time" || it.cat === "date" ? "text" : "numeric"}" autocomplete="off" enterkeyhint="done" placeholder="${ph}" aria-label="Answer"></div>
+    <div class="row"><button class="btn quiet" data-a="nGiveup">Show me</button><span class="grow"></span></div><button class="btn wide" data-a="nCheck" data-primary>Check</button>`;
+  const ph = it.cat === "time" ? "e.g. 7:30" : it.cat === "date" ? "e.g. 4/14" : "Type the number";
+  if (it.kind === "hear") return `${head("Listen · " + it.q)}${play}${input(ph)}`;
+  if (it.kind === "read") return `${head("Read it · " + it.q)}<div class="kq"><div class="kword jp nread">${esc(it.jp)}</div></div>${input(ph)}`;
+  return `${head("How do you say it?")}<div class="kq"><div class="kword">${esc(it.show)}</div></div><div class="opts">${it.opts.map(o => `<button class="opt jp" data-a="nPick" data-v="${esc(o)}">${esc(o)}</button>`).join("")}</div>`;
+};
+function nResult(ok) {
+  const s = S.sess, it = s.items[s.i];
+  if (!it.retry) ok ? s.stats.ok++ : s.stats.bad++;
+  if (!ok) { const r = N_GEN[it.cat](); r.kind = it.kind; if (r.kind === "pick") r.opts = nOpts(r); r.retry = true; s.items.splice(Math.min(s.items.length, s.i + 3), 0, r); }
+  logToday().lesson++; bump(); save();
+  s.phase = ok ? "right" : "wrong"; render(); speak(it.jp);
+}
+function nNext() { const s = S.sess; s.i++; s.phase = "ask"; if (s.i >= s.items.length) { s.finished = true; render(); return; } render(); $("#main").scrollTop = 0; nAuto(); }
+function numbersCard() {
+  return `<section class="card stack"><div class="eyebrow">Numbers in real life</div>
+    <p class="small">Prices at the register, train times, dates, ages. Hear them and type the number. Japanese numbers have tricky readings (さんびゃく, ついたち, はたち…) and this drills exactly those.</p>
+    <div class="row wrap">${[["price", "💴 Prices"], ["time", "🕐 Times"], ["date", "📅 Dates"], ["age", "🎂 Ages"], ["people", "👥 People"]].map(([c, l]) => `<button class="chip" data-a="nStart" data-v="${c}">${l}</button>`).join("")}</div>
+    <button class="btn ghost wide" data-a="nStart" data-v="all">Mixed numbers drill</button></section>`;
+}
+document.addEventListener("click", e => {
+  const b = e.target.closest("[data-a]"); if (!b) return;
+  const a = b.dataset.a, s = S.sess;
+  if (!{ nStart: 1, nNext: 1, nPick: 1, nCheck: 1, nGiveup: 1, nSlow: 1 }[a]) return;
+  e.stopImmediatePropagation();
+  if (a === "nStart") { startNumbers(b.dataset.v === "all" ? ["price", "time", "date", "age", "people"] : [b.dataset.v], "mix"); return; }
+  if (!s || s.type !== "nums") return;
+  const it = s.items[s.i];
+  if (a === "nNext") nNext();
+  else if (a === "nSlow") nSlow(it.jp);
+  else if (a === "nPick") nResult(b.dataset.v === it.jp);
+  else if (a === "nGiveup") nResult(false);
+  else if (a === "nCheck") { const v = $("#nAns") ? $("#nAns").value : ""; if (!v.trim()) { shake("Type the number first."); return; } nResult(nNorm(v, it.cat) === nNorm(it.ans, it.cat)); }
+}, true);
+document.addEventListener("keydown", e => { if (e.key === "Enter" && !e.isComposing && S.sess && S.sess.type === "nums" && !enterTooSoon(e)) { const p = $("[data-primary]"); e.preventDefault(); e.stopImmediatePropagation(); if (p) p.click(); } }, true);
+
+/* ================= Listening practice (earphones, no speaking needed) =================
+   Hear a sentence → pick what it means. Hear a word → type it. Hear a sentence → fill in the missing word.
+   Uses lessons you've started and words you've studied, so everything is within reach. */
+function hearPools() {
+  const lessonS = [];
+  UNITS.forEach(u => { const us = state.units[u.n] || {}; if (!(us.l || us.g || us.c || uStats(u).learned)) return;
+    u.examples.forEach(e => lessonS.push({ jp: e.jp, en: e.en, u: u.n }));
+    u.dl.lines.forEach(l => lessonS.push({ jp: l[1], en: l[2], u: u.n })); });
+  const deckS = [], words = [];
+  for (const k in state.cards) { const c = BYK[k], st = state.cards[k]; if (!c || st.sus) continue;
+    if (st.q === "review" || (st.n || 0) >= 2) { words.push(c); if (c.s && c.se && !c.custom) deckS.push({ jp: stripTags(c.s), say: c.sr ? furiKana(stripTags(c.sr)) : stripTags(c.s), en: c.se, k }); } }
+  return { lessonS, deckS, words };
+}
+function startHear() {
+  const P = hearPools(), sents = P.lessonS.concat(P.deckS);
+  if (sents.length < 6 && P.words.length < 6) { toast("Study a few more words or start a lesson first."); return; }
+  const items = [], used = new Set();
+  const pickS = arr => { for (let t = 0; t < 30; t++) { const x = arr[Math.floor(Math.random() * arr.length)]; if (x && !used.has(x.jp)) { used.add(x.jp); return x; } } return null; };
+  for (let i = 0; i < 5; i++) { const s = pickS(sents); if (!s) break; const others = shuffle(sents.filter(o => o.en !== s.en)).slice(0, 3).map(o => o.en); items.push({ kind: "hmean", s, opts: shuffle([s.en, ...others]) }); }
+  shuffle(P.words.slice()).slice(0, 4).forEach(c => items.push({ kind: "hword", c }));
+  for (let i = 0; i < 3; i++) { const s = pickS(P.lessonS.filter(x => x.jp.split(" ").filter(t => stripTok(t).length >= 2).length >= 2)); if (!s) break; const toks = s.jp.split(" "); const cand = toks.map((t, j) => [t, j]).filter(([t]) => stripTok(t).length >= 2); const [t, j] = cand[Math.floor(Math.random() * cand.length)]; items.push({ kind: "hgap", s, toks, j, ans: stripTok(t) }); }
+  S.sess = { type: "hear", items: shuffle(items), i: 0, phase: "ask", stats: { ok: 0, bad: 0 } };
+  render(); $("#main").scrollTop = 0; hearAuto();
+}
+const hearText = it => it.kind === "hword" ? it.c.kana.split("・")[0] : (it.s.say || joinJp(it.s.jp));
+function hearAuto() { const s = S.sess, it = s && s.items[s.i]; if (it) speak(hearText(it)); }
+renderers.hear = () => {
+  const s = S.sess, it = s.items[s.i], t = hearText(it);
+  const head = x => `<div class="typetag">🎧 ${esc(x)}${it.retry ? " · again" : ""}</div>`;
+  const play = `<div class="kq hearbtns"><button class="speaker" data-a="say" data-t="${esc(t)}" aria-label="Play">${I.sound}</button><button class="chip" data-a="hSlow">🐢 Slower</button></div>`;
+  if (s.phase !== "ask") {
+    const ok = s.phase === "right";
+    const body = it.kind === "hword"
+      ? `<div class="flash back">${emoHtml(it.c)}<div class="fc-word jp">${rubyHtml(it.c.rd)}</div><div class="small muted">${esc(tokRoma(it.c.kana.split("・")[0]))}</div><div class="fc-en">${esc(it.c.en)}</div></div>`
+      : `<div class="ex2"><button class="play-btn" data-a="say" data-t="${esc(t)}">${I.sound}</button><div class="grow"><div class="jp">${esc(it.s.u ? sp(it.s.jp, it.s.u) : it.s.jp)}</div>${it.s.u ? roma(it.s.jp) : ""}<div class="small muted">${esc(it.s.en)}</div>${it.s.u ? `<details class="bdd"><summary>Word by word</summary>${speakBreakdown(it.s.jp)}</details>` : ""}</div></div>`;
+    return `${head(ok ? "Nice" : "Listen again")}<div class="feedback ${ok ? "ok" : "no"}">${ok ? "Correct!" : it.kind === "hgap" ? "The missing word was " + esc(it.ans) + "." : "Not quite."}</div>${body}
+      <button class="btn wide" data-a="hNext" data-primary>Next</button>`;
+  }
+  if (it.kind === "hmean") return `${head("What does it mean?")}${play}<div class="opts">${it.opts.map((o, i) => `<button class="opt" data-a="hPick" data-v="${i}">${esc(o)}</button>`).join("")}</div>`;
+  const input = ph => `<div class="answer"><input id="hAns" type="text" lang="ja" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="done" placeholder="${ph}" aria-label="Your answer"><div class="preview" id="pv"></div></div>
+    <div class="row"><button class="btn quiet" data-a="hGiveup">Show me</button><span class="grow"></span></div><button class="btn wide" data-a="hCheck" data-primary>Check</button>`;
+  if (it.kind === "hword") return `${head("Type the word you hear")}${play}${input("Kana or romaji")}`;
+  return `${head("Fill in the word you hear")}${play}<div class="card blank-s jp">${it.toks.map((w, j) => j === it.j ? `<span class="gap">＿＿</span>${esc(w.slice(stripTok(w).length))}` : esc(w)).join(" ")}</div>${input("The missing word (kana or romaji)")}`;
+};
+function hearResult(ok) {
+  const s = S.sess, it = s.items[s.i];
+  if (!it.retry) ok ? s.stats.ok++ : s.stats.bad++;
+  if (!ok) s.items.splice(Math.min(s.items.length, s.i + 3), 0, { ...it, retry: true });
+  logToday().lesson++; bump(); save();
+  s.phase = ok ? "right" : "wrong"; render(); speak(hearText(it));
+}
+function hearCheck(giveUp) {
+  const s = S.sess, it = s.items[s.i], v = $("#hAns") ? $("#hAns").value : "";
+  if (!giveUp && !v.trim()) { shake("Type what you heard."); return; }
+  if (giveUp) { hearResult(false); return; }
+  if (it.kind === "hword") { hearResult(answerOk(v, it.c)); return; }
+  const k = toHira(roma2kana(v.trim(), true)).replace(/\s/g, ""), a = toHira(it.ans);
+  hearResult(k === a || v.trim() === it.ans || normS(v) === normS(it.ans));
+}
+function hearCard() {
+  return `<section class="card stack"><div class="eyebrow">🎧 Listening</div>
+    <p class="small">Earphones in, no talking needed. Hear sentences from your lessons and words you've studied, then pick the meaning or type what you heard. Tap 🐢 to slow it down.</p>
+    <div class="row"><button class="btn ghost grow" data-a="hStart">Listening practice</button></div></section>`;
+}
+document.addEventListener("click", e => {
+  const b = e.target.closest("[data-a]"); if (!b) return;
+  const a = b.dataset.a, s = S.sess;
+  if (!{ hStart: 1, hNext: 1, hPick: 1, hCheck: 1, hGiveup: 1, hSlow: 1 }[a]) return;
+  e.stopImmediatePropagation();
+  if (a === "hStart") { startHear(); return; }
+  if (!s || s.type !== "hear") return;
+  const it = s.items[s.i];
+  if (a === "hNext") { s.i++; s.phase = "ask"; if (s.i >= s.items.length) { s.finished = true; render(); return; } render(); $("#main").scrollTop = 0; hearAuto(); }
+  else if (a === "hSlow") nSlow(hearText(it));
+  else if (a === "hPick") hearResult(it.opts[+b.dataset.v] === it.s.en);
+  else if (a === "hCheck") hearCheck(false);
+  else if (a === "hGiveup") hearCheck(true);
+}, true);
+document.addEventListener("keydown", e => { if (e.key === "Enter" && !e.isComposing && S.sess && S.sess.type === "hear" && !enterTooSoon(e)) { const p = $("[data-primary]"); e.preventDefault(); e.stopImmediatePropagation(); if (p) p.click(); } }, true);
+/* Today: listening + numbers cards, and done messages */
+const _renderToday2 = renderToday;
+renderToday = function () { const h = _renderToday2(), add = hearCard() + numbersCard(); const j = h.indexOf('<section class="card stack">\n    <div class="eyebrow">Speaking drill'); return j < 0 ? h + add : h.slice(0, j) + add + h.slice(j); };
+const _renderSessDone2 = renderSessDone;
+renderSessDone = function () {
+  const s = S.sess;
+  if (s && (s.type === "hear" || s.type === "nums")) return `<div class="done-hero"><div class="jp">${s.stats.bad === 0 ? "かんぺき！" : "よくできた！"}</div><p class="muted">${s.type === "hear" ? "Listening done. Catching words at real speed is a skill: little and often makes it grow fastest." : "Numbers done. Next time at the register, listen for the hundreds and thousands first."}</p>
+    <div class="stats" style="width:100%"><div><b>${s.stats.ok}</b><span>first try</span></div><div><b>${s.stats.bad}</b><span>to practise</span></div><div><b>${streakNow()}</b><span>day streak</span></div></div></div>
+    <button class="btn wide" data-a="${s.type === "hear" ? "hStart" : "nStart"}" ${s.type === "nums" ? `data-v="all"` : ""}>Another round</button><button class="btn ghost wide" data-a="nav" data-v="today">Back to Today</button>`;
+  return _renderSessDone2();
+};
+
+/* ================= After a chat: what to fix, and turn it into cards ================= */
+function knownWord(jp, kana) {
+  const k = toHira(kana || jp).replace(/\s/g, "");
+  for (const key in state.cards) { const c = BYK[key]; if (!c) continue; if (c.topic === jp || toHira(c.kana.split("・")[0]) === k) return true; }
+  return false;
+}
+const RECAP_SKIP = /^[はがをにでとものへやかねよなだ、。！？]$|^(です|ます|でした|ました|だ|ね|よ|か)$/;
+function buildRecap(t) {
+  const fixes = t.msgs.filter(m => m.me && m.fix).map(m => ({ said: m.text, ...m.fix }));
+  const seen = new Set(), words = [];
+  fixes.forEach(f => (f.words || []).forEach(w => {
+    const jp = (w.jp || "").trim(); if (!jp || seen.has(jp) || RECAP_SKIP.test(jp) || !w.en || /particle|marker/i.test(w.en)) return;
+    seen.add(jp); if (knownWord(jp, w.kana)) return;
+    words.push({ jp, kana: (w.kana || jp).replace(/\s/g, ""), en: w.en, s: f.better, se: f.en || "", pick: true });
+  }));
+  return { scene: t.scene.t, n: t.msgs.filter(m => m.me).length, fixes: fixes.map(f => ({ ...f, pick: false })), words: words.slice(0, 12) };
+}
+function recapHtml(r) {
+  return `<section class="card stack recap"><div class="eyebrow">Chat recap · ${esc(r.scene)}</div>
+    <p>${r.n} message${r.n === 1 ? "" : "s"} sent. ${r.fixes.length ? `Here's what to remember from this chat.` : `No corrections this time. Great job! 🎉`}</p></section>
+  ${r.fixes.length ? `<div class="eyebrow">Better ways to say it</div>${r.fixes.map((f, i) => `<div class="card stack rfix">
+      <div class="small muted">You said: <span class="jp">${esc(f.said)}</span></div>
+      <div class="jp rbetter">${esc(f.better)}</div>${f.kana && f.kana.replace(/\s/g, "") !== f.better ? `<div class="small muted jp">${esc(f.kana)}</div>` : ""}
+      ${f.en ? `<div><b>“${esc(f.en)}”</b></div>` : ""}<div class="small">${esc(f.why || "")}</div>
+      <div class="row"><button class="btn quiet" data-a="say" data-t="${esc(f.kana || f.better)}">${I.sound} Hear it</button><span class="grow"></span>
+      <label class="rchk"><input type="checkbox" data-rfix="${i}" ${f.pick ? "checked" : ""}> Make it a card</label></div></div>`).join("")}` : ""}
+  ${r.words.length ? `<div class="eyebrow">New words from the corrections</div><section class="card stack">${r.words.map((w, i) => `<label class="rword"><input type="checkbox" data-rword="${i}" ${w.pick ? "checked" : ""}><span class="jp grow"><b>${esc(w.jp)}</b>${w.kana !== w.jp ? ` <span class="small muted">${esc(w.kana)}</span>` : ""}</span><span class="small">${esc(w.en)}</span></label>`).join("")}</section>` : ""}
+  ${r.fixes.length || r.words.length ? `<button class="btn wide" data-a="recapAdd">Add selected to my reviews</button>` : ""}
+  <button class="btn ${r.fixes.length || r.words.length ? "ghost " : ""}wide" data-a="recapDone">Done</button>`;
+}
+function recapAdd() {
+  const r = S.talkRecap; if (!r) return;
+  document.querySelectorAll("[data-rword]").forEach(el => { r.words[+el.dataset.rword].pick = el.checked; });
+  document.querySelectorAll("[data-rfix]").forEach(el => { r.fixes[+el.dataset.rfix].pick = el.checked; });
+  state.custom = state.custom || {}; let n = 0; const now = Date.now();
+  const add = (topic, kana, en, s, se) => { const k = "U" + (now + n).toString(36) + n; state.custom[k] = { topic, kana, en, s, se, added: now, fromTalk: 1 }; state.cards[k] = { ...newCard(), d: now }; n++; };
+  r.words.filter(w => w.pick).forEach(w => add(w.jp, w.kana, w.en, w.s && w.s.includes(w.jp) ? w.s.replace(w.jp, `<b>${w.jp}</b>`) : "", w.se));
+  r.fixes.filter(f => f.pick).forEach(f => add(f.better, (f.kana || f.better).replace(/\s/g, ""), f.en || f.why || "", "", ""));
+  if (!n) { toast("Tick something to add first."); return; }
+  registerCustom(); save();
+  toast(`${n} card${n > 1 ? "s" : ""} added to your reviews.`);
+  S.talkRecap = null; render();
+}
+const _renderTalk0 = renderTalk;
+renderTalk = function () { if (!S.talk && S.talkRecap) return recapHtml(S.talkRecap); return _renderTalk0(); };
+document.addEventListener("click", e => {
+  const b = e.target.closest("[data-a]"); if (!b) return;
+  const a = b.dataset.a;
+  if (a === "recapAdd") { e.stopImmediatePropagation(); recapAdd(); }
+  else if (a === "recapDone") { e.stopImmediatePropagation(); S.talkRecap = null; render(); }
+  else if (a === "talkStart") { S.talkRecap = null; }
+}, true);
+
+/* ================= Graded reading library (written for this app) =================
+   lines: [Japanese with spaces between words, English]. after: the lesson it fits after.
+   q: [question, [options], index of the right one]. g: extra word meanings for tapping. */
+const STORIES = [
+{ id: "s1", after: 2, t: "The new student", jp: "あたらしい がくせい", lines: [
+  ["はじめまして。 わたし は アレックス です。", "Nice to meet you. I'm Alex."],
+  ["フランス から きました。", "I came from France."],
+  ["いま、 にほん の こうこう に います。", "Now I'm at a Japanese high school."],
+  ["にほんご は すこし わかります。", "I understand a little Japanese."],
+  ["でも、 はやい にほんご は むずかしい です。", "But fast Japanese is hard."],
+  ["ゆっくり はなして ください。", "Please speak slowly."],
+  ["よろしく おねがいします！", "Nice to meet you, I look forward to it!"]],
+  q: [["Where is Alex from?", ["France", "America", "Japan"], 0], ["What is hard for Alex?", ["Fast Japanese", "Kanji", "Food"], 0], ["What does Alex ask?", ["To speak slowly", "To speak English", "To repeat the name"], 0]],
+  g: { "アレックス": "Alex (name)", "きました": "came (past of くる)", "こうこう": "high school", "わかります": "understand", "はやい": "fast", "はなして": "speak (て-form)" } },
+{ id: "s2", after: 3, t: "At the konbini", jp: "コンビニ で", lines: [
+  ["あさ、 コンビニ に いきました。", "In the morning I went to the konbini."],
+  ["おにぎり と おちゃ を かいました。", "I bought a rice ball and tea."],
+  ["てんいん さん が 「あたためますか」 と いいました。", "The clerk said, \"Shall I heat it up?\""],
+  ["わたし は 「いいえ、 だいじょうぶ です」 と いいました。", "I said, \"No, it's fine.\""],
+  ["おにぎり は ひゃくごじゅう えん でした。", "The rice ball was 150 yen."],
+  ["おちゃ は ひゃく えん でした。", "The tea was 100 yen."],
+  ["ぜんぶ で にひゃくごじゅう えん です。", "All together it's 250 yen."]],
+  q: [["What did they buy?", ["A rice ball and tea", "Bread and coffee", "A bento"], 0], ["Did they want it heated?", ["No", "Yes", "They didn't answer"], 0], ["How much was it all together?", ["250 yen", "150 yen", "350 yen"], 0]],
+  g: { "いきました": "went", "かいました": "bought", "てんいん": "shop clerk", "あたためますか": "shall I heat it up?", "いいました": "said", "でした": "was", "ぜんぶ": "all", "ひゃくごじゅう": "150", "にひゃくごじゅう": "250", "ひゃく": "100" } },
+{ id: "s3", after: 5, t: "Lunch with Yui", jp: "ゆい と ひるごはん", lines: [
+  ["ひるやすみ に、 ゆい と きょうしつ で たべました。", "At lunch break I ate with Yui in the classroom."],
+  ["ゆい の べんとう は とても きれい でした。", "Yui's bento was really pretty."],
+  ["「それ、 おいしそう！」 と いいました。", "I said, \"That looks tasty!\""],
+  ["ゆい は 「たまごやき、 たべる？」 と ききました。", "Yui asked, \"Want some tamagoyaki?\""],
+  ["すこし あまくて、 すごく おいしかった です。", "It was a little sweet and really good."],
+  ["あした は わたし が パン を もってきます。", "Tomorrow I'll bring bread."]],
+  q: [["Where did they eat?", ["In the classroom", "In the cafeteria", "In the park"], 0], ["What did Yui share?", ["Tamagoyaki", "Onigiri", "Bread"], 0], ["How did it taste?", ["A little sweet and good", "Too salty", "Spicy"], 0]],
+  g: { "ひるやすみ": "lunch break", "ゆい": "Yui (name)", "きょうしつ": "classroom", "たべました": "ate", "べんとう": "boxed lunch", "おいしそう": "looks tasty", "たまごやき": "rolled omelette", "ききました": "asked", "あまくて": "sweet and…", "すごく": "really", "おいしかった": "was tasty", "もってきます": "will bring" } },
+{ id: "s4", after: 7, t: "Lost at the station", jp: "えき で まよった", lines: [
+  ["しんじゅく えき は とても おおきい です。", "Shinjuku Station is really big."],
+  ["でぐち が たくさん あって、 わかりません でした。", "There are lots of exits and I didn't know which."],
+  ["えきいん さん に 「ひがしぐち は どこ です か」 と ききました。", "I asked a station worker, \"Where's the east exit?\""],
+  ["「まっすぐ いって、 みぎ です」 と いいました。", "He said, \"Go straight, then it's on the right.\""],
+  ["まっすぐ いきました が、 また わかりません でした。", "I went straight but still didn't get it."],
+  ["もう いちど ききました。 こんど は ちず を みせて くれました。", "I asked once more. This time he showed me a map."],
+  ["やっと でました。 じゅっぷん かかりました！", "I finally got out. It took ten minutes!"]],
+  q: [["What was Alex looking for?", ["The east exit", "The toilet", "A ticket machine"], 0], ["What did the worker show the second time?", ["A map", "A phone", "A ticket"], 0], ["How long did it take?", ["10 minutes", "1 hour", "5 minutes"], 0]],
+  g: { "しんじゅく": "Shinjuku", "でぐち": "exit", "あって": "there are, and…", "わかりません": "don't understand", "えきいん": "station worker", "ひがしぐち": "east exit", "いって": "go, and…", "みぎ": "right", "また": "again", "みせて": "show (て-form)", "くれました": "did for me", "やっと": "finally", "でました": "went out", "じゅっぷん": "ten minutes", "かかりました": "it took (time)" } },
+{ id: "s5", after: 9, t: "Club day", jp: "ぶかつ の ひ", lines: [
+  ["きょう、 はじめて サッカー ぶ に いきました。", "Today I went to the soccer club for the first time."],
+  ["みんな とても はやくて、 びっくり しました。", "Everyone was so fast, I was surprised."],
+  ["せんぱい が 「がんばって！」 と いって くれました。", "A senior said \"Hang in there!\" to me."],
+  ["れんしゅう の あと、 みんな で ラーメン を たべに いきました。", "After practice, we all went to eat ramen."],
+  ["つかれた けど、 たのしかった です。", "I was tired, but it was fun."],
+  ["らいしゅう も いきたい です。", "I want to go next week too."]],
+  q: [["Which club?", ["Soccer", "Baseball", "Music"], 0], ["What surprised Alex?", ["Everyone was fast", "The rain", "The coach"], 0], ["What did they do after practice?", ["Ate ramen", "Went home", "Did homework"], 0]],
+  g: { "サッカー": "soccer", "ぶ": "club", "はやくて": "fast and…", "びっくり": "surprised", "せんぱい": "senior student", "がんばって": "do your best", "いって": "say (て-form)", "れんしゅう": "practice", "あと": "after", "たべに": "to eat (purpose)", "つかれた": "was tired", "たのしかった": "was fun", "いきたい": "want to go" } },
+{ id: "s6", after: 12, t: "A rainy Sunday", jp: "あめ の にちようび", lines: [
+  ["にちようび は あめ でした。", "Sunday was rainy."],
+  ["そと に いきたくなかった ので、 いえ で アニメ を みました。", "I didn't want to go outside, so I watched anime at home."],
+  ["ホストファミリー の おかあさん が ココア を つくって くれました。", "My host mother made me cocoa."],
+  ["「にほん の アニメ、 わかる？」 と ききました。", "She asked, \"Do you understand Japanese anime?\""],
+  ["「はんぶん ぐらい わかります」 と こたえました。", "I answered, \"About half.\""],
+  ["おかあさん は 「すごい ね！」 と わらいました。", "She laughed, \"That's amazing!\""]],
+  q: [["Why did Alex stay home?", ["It was raining", "He was sick", "He had homework"], 0], ["Who made cocoa?", ["The host mother", "Alex", "A friend"], 0], ["How much anime does Alex understand?", ["About half", "Everything", "Nothing"], 0]],
+  g: { "にちようび": "Sunday", "あめ": "rain", "そと": "outside", "いきたくなかった": "didn't want to go", "いえ": "house, home", "みました": "watched", "ホストファミリー": "host family", "ココア": "cocoa", "つくって": "make (て-form)", "はんぶん": "half", "こたえました": "answered", "わらいました": "laughed" } },
+{ id: "s7", after: 15, t: "Weekend plans", jp: "しゅうまつ の よてい", lines: [
+  ["「どようび、 ひま？」 と けんた に きかれました。", "Kenta asked me, \"Are you free Saturday?\""],
+  ["「うん、 ひま だよ。 なに する？」", "\"Yeah, I'm free. What are we doing?\""],
+  ["「かまくら に いこう よ。 だいぶつ が ある んだ。」", "\"Let's go to Kamakura. There's a big Buddha.\""],
+  ["「いいね！ なんじ に あう？」", "\"Nice! What time shall we meet?\""],
+  ["「くじ に えき の まえ で どう？」", "\"How about nine, in front of the station?\""],
+  ["「ちょっと はやい けど… わかった！」", "\"A bit early, but… OK!\""]],
+  q: [["Where are they going?", ["Kamakura", "Kyoto", "Tokyo Tower"], 0], ["What time do they meet?", ["9:00", "7:00", "12:00"], 0], ["Where do they meet?", ["In front of the station", "At school", "At Kenta's house"], 0]],
+  g: { "どようび": "Saturday", "ひま": "free (not busy)", "けんた": "Kenta (name)", "きかれました": "was asked", "かまくら": "Kamakura (city)", "いこう": "let's go", "だいぶつ": "big Buddha statue", "ある": "there is", "なんじ": "what time", "あう": "meet", "くじ": "nine o'clock", "まえ": "in front", "わかった": "got it" } },
+{ id: "s8", after: 18, t: "Feeling sick", jp: "ぐあい が わるい", lines: [
+  ["けさ、 あたま が いたくて、 ねつ も ありました。", "This morning I had a headache and a fever too."],
+  ["がっこう を やすんで、 びょういん に いきました。", "I skipped school and went to the hospital."],
+  ["おいしゃ さん は 「かぜ です ね」 と いいました。", "The doctor said, \"It's a cold.\""],
+  ["くすり を もらって、 いえ で ねました。", "I got medicine and slept at home."],
+  ["ゆうがた、 ゆい から ライン が きました。", "In the evening, I got a LINE message from Yui."],
+  ["「だいじょうぶ？ おだいじに！」", "\"Are you OK? Get well soon!\""],
+  ["うれしくて、 すこし げんき に なりました。", "I was happy and felt a little better."]],
+  q: [["What was wrong?", ["Headache and fever", "Stomach ache", "A broken arm"], 0], ["What did the doctor say?", ["It's a cold", "It's the flu", "Nothing is wrong"], 0], ["Who sent a message?", ["Yui", "The teacher", "Kenta"], 0]],
+  g: { "けさ": "this morning", "あたま": "head", "いたくて": "hurt and…", "ねつ": "fever", "やすんで": "take a day off, and…", "びょういん": "hospital", "おいしゃ": "doctor", "かぜ": "a cold", "くすり": "medicine", "もらって": "receive, and…", "ねました": "slept", "ゆうがた": "evening", "きました": "came", "うれしくて": "happy and…", "なりました": "became" } },
+{ id: "s9", after: 21, t: "Festival night", jp: "おまつり の よる", lines: [
+  ["なつ の おまつり に ゆかた で いきました。", "I went to the summer festival in a yukata."],
+  ["ひと が おおくて、 あるきにくかった です。", "There were lots of people; it was hard to walk."],
+  ["やたい で たこやき と かきごおり を かいました。", "At the stalls I bought takoyaki and shaved ice."],
+  ["かきごおり を たべすぎて、 あたま が キーン と しました。", "I ate the shaved ice too fast and got brain freeze."],
+  ["よる くじ に、 はなび が はじまりました。", "At nine pm, the fireworks started."],
+  ["とても きれい で、 しゃしん を たくさん とりました。", "They were beautiful and I took lots of photos."],
+  ["らいねん も ぜったい いきたい です。", "I definitely want to go next year too."]],
+  q: [["What did Alex wear?", ["A yukata", "A school uniform", "A raincoat"], 0], ["What happened after the shaved ice?", ["Brain freeze", "A stomach ache", "Nothing"], 0], ["When did the fireworks start?", ["9 pm", "7 pm", "Midnight"], 0]],
+  g: { "なつ": "summer", "ゆかた": "summer kimono", "おおくて": "many, and…", "あるきにくかった": "was hard to walk", "やたい": "food stall", "たこやき": "octopus balls", "かきごおり": "shaved ice", "たべすぎて": "ate too much, and…", "キーン": "(brain-freeze sound)", "はなび": "fireworks", "はじまりました": "started", "しゃしん": "photo", "とりました": "took (photos)", "らいねん": "next year", "ぜったい": "definitely" } },
+{ id: "s10", after: 24, t: "The part-time job interview", jp: "バイト の めんせつ", lines: [
+  ["カフェ で バイト の めんせつ が ありました。", "I had a part-time job interview at a café."],
+  ["てんちょう は 「しゅう に なんかい はいれます か」 と ききました。", "The manager asked, \"How many times a week can you work?\""],
+  ["「しゅう に にかい なら だいじょうぶ です」 と こたえました。", "I answered, \"Twice a week is fine.\""],
+  ["「けいご は つかえます か」 と きかれました。", "I was asked, \"Can you use polite Japanese?\""],
+  ["「すこし だけ です が、 がんばります」 と いいました。", "I said, \"Only a little, but I'll do my best.\""],
+  ["つぎ の ひ、 でんわ が きました。 ごうかく でした！", "The next day I got a call. I got the job!"]],
+  q: [["Where is the job?", ["A café", "A konbini", "A restaurant"], 0], ["How often can Alex work?", ["Twice a week", "Every day", "Once a month"], 0], ["What was the result?", ["He got the job", "He failed", "No answer yet"], 0]],
+  g: { "カフェ": "café", "バイト": "part-time job", "めんせつ": "interview", "てんちょう": "store manager", "しゅう": "week", "なんかい": "how many times", "はいれます": "can work (a shift)", "にかい": "twice", "けいご": "polite language", "つかえます": "can use", "きかれました": "was asked", "がんばります": "I'll do my best", "つぎ": "next", "でんわ": "phone call", "ごうかく": "passing, accepted" } },
+{ id: "s11", after: 30, t: "A mix-up at the restaurant", jp: "レストラン で まちがい", lines: [
+  ["ともだち と ファミレス に はいりました。", "I went into a family restaurant with friends."],
+  ["わたし は ハンバーグ を たのみました。", "I ordered a hamburger steak."],
+  ["でも、 きた の は カレー でした。", "But what came was curry."],
+  ["「すみません、 これ、 ちがう と おもう ん です が…」", "\"Excuse me, I think this is wrong…\""],
+  ["てんいん さん は 「もうしわけありません！」 と あやまりました。", "The waiter apologized, \"I'm terribly sorry!\""],
+  ["ハンバーグ が きた とき、 デザート も ついて いました。", "When the hamburger steak came, it came with a dessert too."],
+  ["まちがい の おかげ で、 ちょっと とく しました。", "Thanks to the mistake, I came out a bit ahead."]],
+  q: [["What did Alex order?", ["Hamburger steak", "Curry", "Ramen"], 0], ["What came first?", ["Curry", "Dessert", "Nothing"], 0], ["What extra did he get?", ["A dessert", "A drink", "A discount coupon"], 0]],
+  g: { "ファミレス": "family restaurant", "はいりました": "entered", "ハンバーグ": "hamburger steak", "たのみました": "ordered", "きた": "came", "カレー": "curry", "ちがう": "is wrong", "おもう": "think", "あやまりました": "apologized", "とき": "when", "デザート": "dessert", "ついて": "attached, included", "まちがい": "mistake", "おかげ": "thanks to", "とく": "gain, profit" } },
+{ id: "s12", after: 36, t: "The lost umbrella", jp: "なくした かさ", lines: [
+  ["でんしゃ に かさ を わすれて しまいました。", "I left my umbrella on the train."],
+  ["えき の わすれもの センター に いきました。", "I went to the station's lost-and-found center."],
+  ["「あおい かさ で、 とって が しろい です」 と せつめい しました。", "I explained, \"It's a blue umbrella with a white handle.\""],
+  ["かかり の ひと は パソコン で しらべて くれました。", "The staff member looked it up on the computer for me."],
+  ["「ありました よ。 しぶや えき に とどいて います」", "\"We found it. It's been sent to Shibuya Station.\""],
+  ["にほん では、 わすれもの が よく もどって くる そう です。", "They say lost things often come back in Japan."],
+  ["ほんとう でした。 にほん は すごい！", "It was true. Japan is amazing!"]],
+  q: [["What did Alex lose?", ["An umbrella", "A wallet", "A phone"], 0], ["What color is it?", ["Blue with a white handle", "Black", "Red with a blue handle"], 0], ["Where was it?", ["Shibuya Station", "On the train", "At school"], 0]],
+  g: { "かさ": "umbrella", "わすれて": "forget (て-form)", "しまいました": "(did by accident)", "わすれもの": "lost item", "センター": "center", "とって": "handle", "せつめい": "explanation", "かかり": "person in charge", "パソコン": "computer", "しらべて": "look up (て-form)", "しぶや": "Shibuya", "とどいて": "delivered, arrived", "もどって": "come back (て-form)", "くる": "come", "そう": "I hear that…" } },
+{ id: "s13", after: 42, t: "Kenta's confession", jp: "けんた の こくはく", lines: [
+  ["けんた は ずっと ゆい の こと が すき だった らしい。", "Apparently Kenta has liked Yui for a long time."],
+  ["きのう、 かえり みち で こくはく した そう だ。", "I heard he confessed on the way home yesterday."],
+  ["ゆい は びっくり して、 なにも いえなかった。", "Yui was surprised and couldn't say anything."],
+  ["でも、 けさ ゆい から けんた に メッセージ が きた。", "But this morning Kenta got a message from Yui."],
+  ["「こんど、 いっしょに えいが みない？」", "\"Want to watch a movie together sometime?\""],
+  ["けんた は いちにちじゅう にこにこ して いた。", "Kenta was smiling all day."]],
+  q: [["Who does Kenta like?", ["Yui", "Alex", "His teacher"], 0], ["How did Yui react at first?", ["She was surprised and silent", "She said no", "She laughed"], 0], ["What did Yui suggest?", ["Watching a movie", "Studying together", "Going to the festival"], 0]],
+  g: { "ずっと": "the whole time", "こと": "(about someone)", "すき": "like", "だった": "was", "らしい": "apparently", "かえり": "the way home", "みち": "road, way", "こくはく": "confession of love", "した": "did", "いえなかった": "couldn't say", "メッセージ": "message", "えいが": "movie", "みない": "won't you watch?", "いちにちじゅう": "all day long", "にこにこ": "smiling" } },
+{ id: "s14", after: 48, t: "Six months in Japan", jp: "にほん に きて ろっかげつ", lines: [
+  ["にほん に きて、 もう ろっかげつ に なりました。", "It's already been six months since I came to Japan."],
+  ["さいしょ は、 コンビニ で 「あたためますか」 も わかりません でした。", "At first, I didn't even understand \"Shall I heat it up?\" at the konbini."],
+  ["いま は ともだち と じょうだん を いったり、 バイト で けいご を つかったり して います。", "Now I joke with friends and use polite Japanese at my part-time job."],
+  ["まだ まちがえる こと も おおい です。", "I still make lots of mistakes."],
+  ["でも、 まちがえて も、 みんな やさしく なおして くれます。", "But even when I make mistakes, everyone corrects me kindly."],
+  ["のこり の はんとし で、 もっと しぜん に はなせる よう に なりたい です。", "In the remaining half year, I want to become able to speak more naturally."]],
+  q: [["How long has Alex been in Japan?", ["Six months", "One year", "Two months"], 0], ["What didn't he understand at first?", ["\"Shall I heat it up?\"", "His name", "Numbers"], 0], ["What is his goal?", ["Speak more naturally", "Go home", "Learn kanji only"], 0]],
+  g: { "きて": "came, and since…", "ろっかげつ": "six months", "なりました": "it has become", "さいしょ": "the beginning", "じょうだん": "joke", "いったり": "saying (among other things)", "けいご": "polite language", "つかったり": "using (among other things)", "まちがえる": "make a mistake", "おおい": "many", "まちがえて": "make mistakes (て-form)", "やさしく": "kindly", "なおして": "correct (て-form)", "のこり": "the rest", "はんとし": "half a year", "しぜん": "natural", "はなせる": "can speak", "よう": "so that", "なりたい": "want to become" } }
+];
+
+/* ================= Graded reading: short stories with tap-for-meaning and questions ================= */
+let _rIndex = null;
+function readIndex() {
+  if (_rIndex) return _rIndex;
+  _rIndex = {};
+  ALLCARDS.forEach(c => { const en = c.en.split(",")[0]; c.topic.split("・").forEach(t => { if (!_rIndex[t]) _rIndex[t] = { en, k: c.k }; }); const kn = c.kana.split("・")[0]; if (!_rIndex[kn]) _rIndex[kn] = { en, k: c.k }; });
+  return _rIndex;
+}
+const rTok = t => t.replace(/[、。！？…「」『』!?,.\s]/g, "");
+const COMMON_G = { "いいました": "said", "ききました": "asked / heard", "くれました": "did (it) for me", "くれます": "does (it) for me", "ありました": "there was / had", "かいました": "bought", "こたえました": "answered", "あたためますか": "shall I heat it up?", "んだ": "(explaining: it's that…)", "くじ": "nine o'clock", "いきました": "went", "きました": "came", "みました": "saw / watched", "たべました": "ate", "しました": "did", "なりました": "became", "でした": "was", "ました": "(polite past)", "ません": "(polite not)", "います": "is (people/animals), is doing", "あります": "there is, have", "ください": "please" };
+function glossOf(tok, st) {
+  const t = rTok(tok); if (!t) return null;
+  const g = (st && st.g) || {};
+  if (g[t]) return { w: t, en: g[t], k: (readIndex()[t] || {}).k };
+  if (typeof GLOSS !== "undefined" && GLOSS[t]) return { w: t, en: GLOSS[t], k: (readIndex()[t] || {}).k };
+  if (COMMON_G[t] && !(typeof GLOSS !== "undefined" && GLOSS[t])) return { w: t, en: COMMON_G[t], k: (readIndex()[t] || {}).k };
+  if (LVOCAB[t]) return { w: t, en: LVOCAB[t], k: (readIndex()[t] || {}).k };
+  const r = readIndex()[t] || readIndex()[toHira(t)]; if (r) return { w: t, en: r.en, k: r.k };
+  return { w: t, en: "", k: null };
+}
+function allStories() { return (state.stories || []).concat(STORIES); }
+function lessonsDoneCount() { return UNITS.filter(u => { const us = state.units[u.n] || {}; return us.g || us.c; }).length; }
+function storyStatus(st) { const r = (state.reads || {})[st.id]; return r ? `<span class="chip good">✓ ${r.score}/${st.q.length}</span>` : ""; }
+function renderReadList() {
+  const done = lessonsDoneCount(), mine = state.stories || [];
+  const rec = STORIES.find(st => !(state.reads || {})[st.id] && st.after <= Math.max(3, done + 2));
+  return `<p class="small muted">Short stories written with words from your lessons. Tap any word for its meaning, play each line, then answer a few questions. Reading lots of easy text builds speed fast.</p>
+  ${rec ? `<section class="card stack"><div class="eyebrow">Suggested for you</div><h3>${esc(rec.t)} <span class="jp muted small">${esc(rec.jp)}</span></h3><button class="btn wide" data-a="openStory" data-v="${rec.id}">Read it</button></section>` : ""}
+  ${talkFn ? `<section class="card stack"><div class="eyebrow">✨ A new story, just for you</div><p class="small">Claude writes a story at your level, using words you've studied.</p>
+    <div class="row wrap">${[["school", "🏫 School"], ["food", "🍜 Food"], ["friends", "🧑‍🤝‍🧑 Friends"], ["travel", "🚃 Travel"], ["daily", "🏠 Daily life"], ["funny", "😂 Something funny"]].map(([v, l]) => `<button class="chip" data-a="newStory" data-v="${v}" ${S.storyBusy ? "disabled" : ""}>${l}</button>`).join("")}</div>
+    ${S.storyBusy ? `<p class="small muted">Writing your story… (this takes a few seconds)</p>` : ""}</section>` : ""}
+  ${mine.length ? `<div class="eyebrow">Your stories</div><div class="slist">${mine.map(st => storyRow(st, true)).join("")}</div>` : ""}
+  <div class="eyebrow">Library</div><div class="slist">${STORIES.map(st => storyRow(st, false, done)).join("")}</div>`;
+}
+function storyRow(st, mine, done) {
+  const ahead = !mine && st.after > (done || 0) + 3;
+  return `<button class="srow ${ahead ? "ahead" : ""}" data-a="openStory" data-v="${st.id}"><span class="grow"><b>${esc(st.t)}</b><span class="jp small muted">${esc(st.jp)}</span></span>${storyStatus(st)}${!mine ? `<span class="small muted">after NH${String(st.after).padStart(2, "0")}</span>` : ""}</button>`;
+}
+function openStory(id) { S.story = { id, en: {}, ans: {}, pop: null }; if (S.view !== "story" && S.view !== "read") S.readFrom = S.view; S.view = "story"; render(); $("#main").scrollTop = 0; }
+function renderStory() {
+  const st = allStories().find(x => x.id === (S.story || {}).id); if (!st) { S.view = "read"; return renderReadList(); }
+  const ss = S.story, allEn = ss.allEn;
+  const lines = st.lines.map((l, i) => `<div class="sline"><button class="play-btn" data-a="say" data-t="${esc(joinJp(l[0]))}" aria-label="Play">${I.sound}</button><div class="grow"><div class="jp stext">${l[0].split(" ").map((t, j) => rTok(t) ? `<span class="tok" data-a="tok" data-l="${i}" data-j="${j}">${esc(t)}</span>` : esc(t)).join(" ")}</div>
+    ${allEn || ss.en[i] ? `<div class="small muted">${esc(l[1])}</div>` : `<button class="btn quiet sen" data-a="sEn" data-i="${i}">English</button>`}</div></div>`).join("");
+  const qs = st.q.map((q, qi) => { const a = ss.ans[qi]; return `<div class="card stack sq"><b>${qi + 1}. ${esc(q[0])}</b><div class="opts">${q[1].map((o, oi) => `<button class="opt ${a !== undefined ? (oi === q[2] ? "right" : oi === a ? "wrong" : "") : ""}" data-a="sAns" data-q="${qi}" data-o="${oi}" ${a !== undefined ? "disabled" : ""}>${esc(o)}</button>`).join("")}</div></div>`; }).join("");
+  const answered = Object.keys(ss.ans).length, score = st.q.filter((q, i) => ss.ans[i] === q[2]).length;
+  return `<div class="shead"><h2>${esc(st.t)}</h2><div class="jp muted">${esc(st.jp)}</div></div>
+    <div class="row"><button class="chip" data-a="say" data-t="${esc(st.lines.map(l => joinJp(l[0])).join("。 "))}">${I.sound} Play all</button><button class="chip" data-a="sAllEn" aria-pressed="${!!allEn}">${allEn ? "Hide English" : "Show all English"}</button></div>
+    <section class="card stack story">${lines}</section>
+    <p class="small muted">Tap a word to see what it means.</p>
+    <div class="eyebrow">Questions</div>${qs}
+    ${answered === st.q.length ? `<div class="feedback ${score === st.q.length ? "ok" : "no"}">${score}/${st.q.length} right${score === st.q.length ? ". Perfect!" : ". Read it once more and the rest will click."}</div><button class="btn wide" data-a="nav" data-v="read">More stories</button>` : ""}
+    ${ss.pop ? popHtml(ss.pop) : ""}`;
+}
+function popHtml(p) {
+  const c = p.k && BYK[p.k], inDeck = p.k && state.cards[p.k];
+  return `<div class="tokpop" role="dialog"><div class="row"><span class="jp tp-w grow">${esc(p.w)}</span><button class="icon-btn" data-a="tokClose" aria-label="Close">${I.x}</button></div>
+    <div class="small muted">${esc(tokRoma(p.w))}</div><div class="tp-en">${p.en ? esc(p.en) : "No dictionary entry for this form. Tap English under the line for the meaning."}</div>
+    <div class="row"><button class="chip" data-a="say" data-t="${esc(p.w)}">${I.sound} Hear it</button>${c ? `<button class="chip" data-a="wordInfo" data-k="${esc(p.k)}">More about it</button>${inDeck ? `<span class="small muted">in your deck</span>` : `<button class="chip" data-a="tokAdd">+ Add to reviews</button>`}` : p.en ? `<button class="chip" data-a="tokAdd">+ Add to reviews</button>` : ""}</div></div>`;
+}
+async function newStory(topic) {
+  if (!talkFn || S.storyBusy) return;
+  S.storyBusy = true; render();
+  const done = UNITS.filter(u => { const us = state.units[u.n] || {}; return us.g || us.c; });
+  const grammar = done.slice(-8).flatMap(u => u.g.map(g => g.t)).join("; ") || "です/ます, basic particles";
+  const known = Object.keys(state.cards).map(k => BYK[k]).filter(Boolean).map(c => c.kana.split("・")[0]).slice(0, 160).join("、");
+  const topics = { school: "a day at a Japanese high school", food: "food, eating out or cooking", friends: "hanging out with Japanese friends", travel: "a trip or the trains", daily: "daily life with a host family", funny: "a small funny misunderstanding" };
+  const prompt = `Write a short graded reading story in Japanese for an English-speaking exchange student in Japan (beginner, speaking-focused). Topic: ${topics[topic] || topic}. The main character is Alex.
+Level: the learner has finished ${done.length} lessons; grammar they know includes: ${grammar}. Words they know include: ${known}.
+Rules: 6–8 short lines. Write ONLY in hiragana and katakana (no kanji), with a SPACE between every word and particle (e.g. "わたし は がっこう に いきます。"). Mostly use words they know; at most 6 new words. Natural, everyday Japanese.
+Return JSON only: {"t":"English title","jp":"Japanese title (kana, spaces)","lines":[["Japanese line with spaces","English translation"]],"q":[["question in English",["right answer","wrong answer","wrong answer"]]],"g":{"word as written in the story":"short English meaning"}}
+Give exactly 3 questions (right answer first, we will shuffle). In "g", include EVERY verb/adjective form and every word you think might be new, exactly as it appears.`;
+  try {
+    const r = await talkFn.json(prompt, { modelTier: "quick", cache: false });
+    if (!r || !Array.isArray(r.lines) || !r.lines.length) throw 0;
+    const q = (r.q || []).slice(0, 4).map(x => { const opts = (x[1] || []).slice(0, 4).map(String); const right = opts[0]; const sh = shuffle(opts.slice()); return [String(x[0]), sh, sh.indexOf(right)]; }).filter(x => x[1].length >= 2);
+    const st = { id: "c" + Date.now().toString(36), mine: 1, after: 0, t: String(r.t || "A new story").slice(0, 60), jp: String(r.jp || "").slice(0, 60), lines: r.lines.slice(0, 10).map(l => [String(l[0]).slice(0, 200), String(l[1] || "").slice(0, 240)]), q, g: Object.fromEntries(Object.entries(r.g || {}).slice(0, 60).map(([k, v]) => [String(k).slice(0, 30), String(v).slice(0, 60)])) };
+    state.stories = [st].concat(state.stories || []).slice(0, 30); save();
+    S.storyBusy = false; openStory(st.id); return;
+  } catch (e) { toast(e && e.code === "not_granted" ? "Allow Claude to write stories, then try again." : "Couldn't write a story right now. Try again."); }
+  S.storyBusy = false; render();
+}
+function readingCard() {
+  const rec = STORIES.find(st => !(state.reads || {})[st.id] && st.after <= Math.max(3, lessonsDoneCount() + 2));
+  return `<section class="card stack"><div class="eyebrow">📖 Reading</div><p class="small">Short stories at your level. Tap words for meanings, then answer questions.</p>
+    <button class="btn ghost wide" data-a="${rec ? "openStory" : "nav"}" ${rec ? `data-v="${rec.id}"` : `data-v="read"`}>${rec ? `Read: ${esc(rec.t)}` : "Open the reading room"}</button>${rec ? `<button class="btn quiet" data-a="nav" data-v="read">All stories ›</button>` : ""}</section>`;
+}
+document.addEventListener("click", e => {
+  const b = e.target.closest("[data-a]"); if (!b) return;
+  const a = b.dataset.a;
+  if (!{ openStory: 1, tok: 1, tokClose: 1, tokAdd: 1, sEn: 1, sAllEn: 1, sAns: 1, newStory: 1 }[a] && !(a === "nav" && b.dataset.v === "read")) return;
+  e.stopImmediatePropagation();
+  if (a === "nav") { stopSpeak(); S.sess = null; if (S.view !== "story") S.readFrom = S.view === "read" ? S.readFrom : S.view; S.view = "read"; render(); $("#main").scrollTop = 0; return; }
+  if (a === "openStory") { openStory(b.dataset.v); return; }
+  if (a === "newStory") { newStory(b.dataset.v); return; }
+  const ss = S.story, st = ss && allStories().find(x => x.id === ss.id); if (!st) return;
+  const keep = () => { const y = $("#main").scrollTop; render(); $("#main").scrollTop = y; };
+  if (a === "tok") { const t = st.lines[+b.dataset.l][0].split(" ")[+b.dataset.j]; ss.pop = glossOf(t, st); keep(); speak(ss.pop.w); }
+  else if (a === "tokClose") { ss.pop = null; keep(); }
+  else if (a === "tokAdd") {
+    const p = ss.pop; if (!p) return;
+    if (p.k && BYK[p.k]) { if (!state.cards[p.k]) state.cards[p.k] = { ...newCard(), d: Date.now() }; }
+    else { const k = "U" + Date.now().toString(36); state.custom = state.custom || {}; const line = st.lines.find(l => l[0].split(" ").some(t => rTok(t) === p.w)); state.custom[k] = { topic: p.w, kana: p.w, en: p.en, s: line ? joinJp(line[0]).replace(p.w, `<b>${p.w}</b>`) : "", se: line ? line[1] : "", added: Date.now() }; state.cards[k] = { ...newCard(), d: Date.now() }; registerCustom(); }
+    save(); toast("Added to your reviews."); ss.pop = null; keep();
+  }
+  else if (a === "sEn") { ss.en[+b.dataset.i] = true; keep(); }
+  else if (a === "sAllEn") { ss.allEn = !ss.allEn; keep(); }
+  else if (a === "sAns") {
+    const qi = +b.dataset.q; if (ss.ans[qi] !== undefined) return; ss.ans[qi] = +b.dataset.o;
+    if (Object.keys(ss.ans).length === st.q.length) { const score = st.q.filter((q, i) => ss.ans[i] === q[2]).length; state.reads = state.reads || {}; state.reads[st.id] = { at: Date.now(), score }; logToday().lesson += 2; bump(); save(); if (score === st.q.length && typeof confetti === "function") confetti(40); }
+    keep();
+  }
+}, true);
+/* Today + Lessons entry points */
+const _renderToday3 = renderToday;
+renderToday = function () { const h = _renderToday3(), add = readingCard(); const j = h.indexOf("🎧 Listening"); if (j < 0) return h + add; const k = h.lastIndexOf('<section class="card stack">', j); return h.slice(0, k) + add + h.slice(k); };
+const _renderPath0 = renderPath;
+renderPath = function () { return `<button class="card row readbar" data-a="nav" data-v="read"><span class="rb-ic">📖</span><span class="grow"><b>Reading room</b><span class="small muted">Stories at your level · tap words for meanings</span></span><span class="muted">›</span></button>` + _renderPath0(); };
+
 /* ================= Small celebrations ================= */
 function confetti(n) {
   try {
@@ -4976,7 +6417,7 @@ render = function () {
   if (main) main.classList.toggle("nofx", key === render._last && S.view !== "study");
   render._last = key;
   _render3();
-  if (S.sess && S.sess.finished && _celebrated !== S.sess) { _celebrated = S.sess; if (S.sess.stats && S.sess.stats.bad === 0) confetti(70); else confetti(30); }
+  if (S.sess && S.sess.finished && _celebrated !== S.sess) { _celebrated = S.sess; if (S.sess.failed) return; if (S.sess.stats && S.sess.stats.bad === 0) confetti(70); else confetti(30); }
 };
 
 /* ================= Friends edition: standalone file, no Claude, saves on the device ================= */
