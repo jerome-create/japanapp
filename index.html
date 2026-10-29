@@ -511,6 +511,41 @@ main.talkmode>*,main.nofx>*{animation:none}
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important}.confetti{display:none}}
 .done-hero p .jp{font-size:inherit;font-weight:700;color:var(--ink)}
 html.friends [data-a=nav][data-v=talk]{display:none}
+/* Small-screen safeguards: keep dense learning controls usable without horizontal scrolling. */
+html,body{min-width:0;max-width:100%;overflow-x:hidden}
+.app{width:100%;min-width:0}
+.top{padding-top:calc(12px + env(safe-area-inset-top,0px))}
+button,.btn,.opt,.k,.kstep,.scene,.nav button{touch-action:manipulation}
+.card,.flash,.more,.wstat,.kmeet,.scene,.sent-block{min-width:0;max-width:100%}
+.card,.flash,.more,.wstat,.kmeet,.scene,.sent-block,.bub{overflow-wrap:anywhere}
+@media (max-width:480px){
+  main{padding-left:12px;padding-right:12px}
+  .top{padding-left:12px;padding-right:12px}
+  .hello{padding-left:14px;padding-right:14px}
+  .prompt .en{font-size:clamp(22px,7vw,28px)}
+  .kbig{font-size:clamp(76px,24vw,104px)}
+  .kword{font-size:clamp(42px,15vw,56px)}
+  .kopts{gap:8px}
+  .kopt{min-height:56px;font-size:clamp(18px,6vw,22px)}
+  .scenes{grid-template-columns:1fr}
+}
+@media (max-width:380px){
+  main{padding-left:10px;padding-right:10px;gap:12px}
+  .top{gap:8px;padding-left:10px;padding-right:10px}
+  .top h1{font-size:13px}
+  .hello{align-items:flex-start;flex-direction:column;gap:10px}
+  .streak{align-self:flex-end}
+  .stats{gap:6px}
+  .stats b{font-size:19px}
+  .kgrid{grid-template-columns:repeat(4,1fr)}
+  .kgrid.y{grid-template-columns:repeat(3,1fr)}
+  .rates{gap:4px}
+  .rbtn{font-size:13px}
+  .rbtn small{font-size:11px}
+  .rbtn em{font-size:9px}
+  .conj{grid-template-columns:1fr}
+  .row-opts .opt{min-width:56px;padding-left:10px;padding-right:10px}
+}
 </style></head><body>
 <div class="app"><header class="top" id="top"></header><main id="main"></main><nav class="nav" id="nav" aria-label="Sections"></nav></div><div class="toast" id="toast" hidden></div>
 <script>
